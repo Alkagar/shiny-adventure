@@ -1,7 +1,8 @@
 $basic: #333333; 
-$contrast: #FFFFFF;
-$ligher: #AAAAAA;
+$contrast: #DDDDDD;
+$lighter: #AAAAAA;
 $highlight: #993300;
+$error: #C65B5B;
 
 $background: #EBEBEB;
 html {
@@ -17,7 +18,7 @@ h1 {
     font-size:130%;
     font-weight:bold;
     color:$highlight;
-    border-bottom:1px solid $ligher;
+    border-bottom:1px solid $lighter;
     margin-bottom:15px;
 }
 
@@ -37,10 +38,10 @@ h1 {
 .menu  {
     width:100%;
     padding:10px 0px;
-    color:$ligher;
+    color:$lighter;
     background-color:$basic;
     a {
-        color:$ligher;
+        color:$lighter;
     }
     li {
         display:inline;
@@ -56,7 +57,7 @@ h1 {
     @extend .menu;
     font-size:80%;
     li:hover {
-        color: $ligher;
+        color: $lighter;
     }
 }
 
@@ -67,3 +68,51 @@ a {
 a:hover {
     color: $highlight;
 }
+
+.form {
+    label {
+        padding:4px;
+        padding-left:14px;
+        color:$basic;
+    }
+
+    input {
+        font-size:10px;
+        padding:2px;
+        width:250px;
+    }
+    input[type="checkbox"] {
+        width:25px;
+    }
+    input[type="checkbox"] {
+        width:25px;
+    }
+
+    .row {
+        margin-top:5px;
+    }
+    .row.submit {
+        margin-top:15px;
+    }
+    .errorSummary {
+        padding:15px;
+        background-color:$error;
+        border:1px solid $highlight;
+        p {
+            font-weight:bold;
+        }
+        li {
+            list-style-type: square;
+            margin-left:20px;
+            margin-top:5px;
+        }
+    }
+
+}
+
+
+
+
+
+
+
