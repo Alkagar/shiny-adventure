@@ -1,7 +1,7 @@
 <?php
     class AController extends CController
     {
-        public $layout='//layouts/base';
+        public $layout='//layouts/main';
 
         public function init() 
         {
