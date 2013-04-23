@@ -1,0 +1,12 @@
+RewriteEngine on
+
+# if a directory or a file exists, use it directly
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# otherwise forward it to index.php
+RewriteBase /
+RewriteRule . index.php
+
+SetEnv YII_PATH /home/alkagar/repos/libraries/yii
+SetEnv YII_LOCAL_CONFIG /home/alkagar/repos/shiny-adventure/system/config/taurus.php
