@@ -3,6 +3,11 @@
     class MainController extends AController
     {
 
+        public function actionIndex()
+        { 
+            $this->render('index', array( ));
+        }
+
         /**
         * This is the system action to handle external exceptions.
         */
