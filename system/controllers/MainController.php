@@ -8,6 +8,16 @@
             $this->render('index', array( ));
         }
 
+        public function actionHelp() 
+        {
+            $this->render('help', array( ));
+        }
+
+        public function actionLogin() 
+        {
+            $this->render('login', array( ));
+        }
+
         /**
         * This is the system action to handle external exceptions.
         */
