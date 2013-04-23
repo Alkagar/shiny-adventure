@@ -11,7 +11,7 @@
 
             $this->createIndex('uq_user_mail', '{{user}}', 'mail', 'true');
 
-            $this->addForeignKey('fk_user_status_status', 'user', 'status', 'status', 'id', 'restrict'); 
+            $this->addForeignKey('fk_user_status_status', 'user', 'status_id', 'status', 'id', 'restrict'); 
 
             $this->addForeignKey('fk_auth_item_child_auth_item_parent', 'auth_item_child', 'parent', 'auth_item', 'name', 'cascade', 'cascade'); 
             $this->addForeignKey('fk_auth_item_child_auth_item_child', 'auth_item_child', 'child', 'auth_item', 'name', 'cascade', 'cascade'); 
@@ -21,21 +21,22 @@
 
             $this->addForeignKey('fk_task_user_author_id', 'task', 'author_id', 'user', 'id', 'restrict'); 
             $this->addForeignKey('fk_task_project_project_id', 'task', 'project_id', 'project', 'id', 'restrict'); 
-            $this->addForeignKey('fk_task_status_status', 'task', 'status', 'status', 'id', 'restrict'); 
+            $this->addForeignKey('fk_task_status_status', 'task', 'status_id', 'status', 'id', 'restrict'); 
+            $this->addForeignKey('fk_task_task_parent_id', 'task', 'parent_id', 'task', 'id', 'restrict'); 
 
             $this->addForeignKey('fk_attachment_user_author_id', 'attachment', 'author_id', 'user', 'id', 'restrict'); 
         }
 
         public function safeDown()
         {
-            $this->dropForeignKey('fk_user_status_status', 'user');
+            $this->dropForeignKey('fk_user_status_status_id', 'user');
             $this->dropForeignKey('fk_auth_item_child_auth_item_parent', 'auth_item_child'); 
             $this->dropForeignKey('fk_auth_item_child_auth_item_child', 'auth_item_child'); 
             $this->dropForeignKey('fk_auth_assignment_auth_item_name', 'auth_assignment'); 
             $this->dropForeignKey('fk_project_user_author_id', 'project');
             $this->dropForeignKey('fk_task_user_author_id', 'task');
             $this->dropForeignKey('fk_task_project_project_id', 'task');
-            $this->dropForeignKey('fk_task_status_status', 'task');
+            $this->dropForeignKey('fk_task_status_status_id', 'task');
             $this->dropForeignKey('fk_attachment_user_author_id', 'attachment');
             $this->dropIndex('uq_user_mail', '{{user}}');
             $tables = $this->_getStructure();
@@ -58,7 +59,7 @@
                     'mail' => 'varchar(128) NOT NULL',
                     'password' => 'varchar(40) NOT NULL',
                     'signature' => 'varchar(64)',
-                    'status' => 'int',
+                    'status_id' => 'int',
                 ),
                 'project' => array(
                     'id' => 'pk',
@@ -75,9 +76,10 @@
                     'project_id' => 'int',
                     'time_spent' => 'int',
                     'author_id' => 'int',
+                    'parent_id' => 'int default null',
                     'created_at' => 'datetime',
                     'modified_at' => 'datetime',
-                    'status' => 'int',
+                    'status_id' => 'int',
                 ),
                 'attachment' => array(
                     'id' => 'pk',
