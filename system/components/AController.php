@@ -7,6 +7,6 @@
         {
             parent::init();
 
-            Yii::app()->language = 'pl_pl';
+            Yii::app()->language = 'pl';
         }
     }
