@@ -1,9 +1,6 @@
-<?php
-$this->pageTitle=Yii::app()->name . ' - Error';
-?>
+<h1><?php echo Yii::t('site', 'title.error'); ?></h1>
 
-<h2>Error <?php echo $code; ?></h2>
-
-<div class="error">
-<?php echo CHtml::encode($message); ?>
+<div>
+    <p> <?php echo Yii::t('site', 'msg.error-code'), ': ', $code; ?> </p>
+    <p> <?php echo Yii::t('site', 'msg.error-description'), ': ', CHtml::encode($message); ?></p>
 </div>

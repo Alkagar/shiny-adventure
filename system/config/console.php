@@ -7,7 +7,6 @@
                 'migrationPath'=>'application.migrations',
                 'migrationTable'=>'{{migration_history}}',
                 'connectionID'=>'db',
-                'templateFile'=>'application.migrations.template',
             ),
         ),
 

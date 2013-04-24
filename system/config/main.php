@@ -13,6 +13,7 @@
         'import'=>array(
             'application.models.*',
             'application.components.*',
+            'application.form.*',
         ),
 
         'modules'=>array(
@@ -27,6 +28,7 @@
         'components'=>array(
             'user'=>array(
                 'allowAutoLogin'=>true,
+                'class' => 'AWebUser',
             ),
             'urlManager'=>array(
                 'urlFormat'=>'path',
@@ -61,5 +63,7 @@
         // using Yii::app()->params['paramName']
         'params'=>array(
             'adminEmail'=>'jakub@mrowiec.org',
+            'loginPage' => '/main/login',
+            'dashboardPage' => '/user/dashboard',
         ),
     );

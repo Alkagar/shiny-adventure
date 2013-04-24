@@ -31,6 +31,13 @@ h1 {
 }
 .content {
     margin:10px;
+    p {
+        text-align:left;
+        margin: {
+            top: 5px;
+            bottom:5px;
+        }
+    }
 }
 
 
