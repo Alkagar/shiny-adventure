@@ -17,6 +17,11 @@
             $this->render('help', array( ));
         }
 
+        public function actionHome() 
+        {
+            $this->render('home', array( ));
+        }
+
         public function actionLogin() 
         {
             $form = new LoginForm();
@@ -45,10 +50,11 @@
         {
             if($error=Yii::app()->errorHandler->error)
             {
-                if(Yii::app()->request->isAjaxRequest)
-                echo $error['message'];
-                else
-                $this->render('//common/error', $error);
+                if(Yii::app()->request->isAjaxRequest) {
+                    echo $error['message'];
+                } else {
+                    $this->render('/common/error', $error);
+                }
             }
         }
     }

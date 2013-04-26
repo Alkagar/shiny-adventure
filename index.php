@@ -12,8 +12,8 @@ SetEnv YII_PATH /your/yii/path
 */
 
 // define consts  
-defined('YII_DEBUG') or define('YII_DEBUG',true);
-defined('YII_TRACE_LEVEL') or define('YII_TRACE_LEVEL',3);
+//defined('YII_DEBUG') or define('YII_DEBUG',true);
+//defined('YII_TRACE_LEVEL') or define('YII_TRACE_LEVEL',3);
 
 // set yii path
 if(isset($_SERVER['YII_PATH'])) {

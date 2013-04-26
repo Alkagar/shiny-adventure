@@ -1,6 +1,6 @@
 <h1><?php echo Yii::t('site', 'title.login');?></h1>
 <div>
-    <div class="form">
+    <div class='form'>
         <?php echo CHtml::beginForm(); ?>
         <?php echo CHtml::errorSummary($form); ?>
 

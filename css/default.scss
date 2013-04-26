@@ -3,6 +3,7 @@ $contrast: #DDDDDD;
 $lighter: #AAAAAA;
 $highlight: #993300;
 $error: #C65B5B;
+$success: #99EE44;
 
 $background: #EBEBEB;
 html {
@@ -115,6 +116,11 @@ a:hover {
         }
     }
 
+}
+.notification {
+    padding:15px;
+    background-color:$success;
+    border:1px solid $highlight;
 }
 
 

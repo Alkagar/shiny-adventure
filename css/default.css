@@ -78,3 +78,8 @@ a:hover {
     list-style-type: square;
     margin-left: 20px;
     margin-top: 5px; }
+
+.notification {
+  padding: 15px;
+  background-color: #99ee44;
+  border: 1px solid #993300; }

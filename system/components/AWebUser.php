@@ -2,13 +2,18 @@
     class AWebUser extends CWebUser {
         private $_model;
 
-        public function model() 
+        public function model($refresh = true) 
         {
-            if(empty($this->_model)) {
+            if(empty($this->_model) || $refresh) {
                 $user = new User();
                 $user->mail = Yii::app()->user->email;
-                $user = $user->search()->getData();
-                $this->_model = $user;
+
+                $userDataProvider = $user->search();
+                if((int)$userDataProvider->totalItemCount !== 1) {
+                    throw new CException(Yii::t('errors', 'too-many-users-found'), 2001);
+                }
+                $users = $userDataProvider->getData();
+                $this->_model = array_shift($users);
             } 
             return $this->_model;
         }
