@@ -27,6 +27,7 @@ h1 {
     margin-bottom: 5px; }
 
 .menu, .footer {
+  font-size: 80%;
   width: 100%;
   padding: 10px 0px;
   color: #aaaaaa;
@@ -35,15 +36,13 @@ h1 {
     color: #aaaaaa; }
   .menu li, .footer li {
     display: inline;
-    padding: 0px 15px;
+    padding: 0px 5px;
     cursor: pointer; }
   .menu li:hover, .footer li:hover {
     color: #993300; }
 
-.footer {
-  font-size: 80%; }
-  .footer li:hover {
-    color: #aaaaaa; }
+.footer li:hover {
+  color: #aaaaaa; }
 
 a {
   color: #333333;

@@ -44,6 +44,7 @@ h1 {
 
 
 .menu  {
+    font-size:80%;
     width:100%;
     padding:10px 0px;
     color:$lighter;
@@ -53,7 +54,7 @@ h1 {
     }
     li {
         display:inline;
-        padding:0px 15px;
+        padding:0px 5px;
         cursor:pointer;
     }
     li:hover {
@@ -63,7 +64,6 @@ h1 {
 
 .footer {
     @extend .menu;
-    font-size:80%;
     li:hover {
         color: $lighter;
     }
