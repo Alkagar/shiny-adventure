@@ -4,7 +4,11 @@
     {
         public function actionDashboard()
         {
-            $this->render('dashboard');
+            $criteria = Project::getUserProjectsCriteria();
+            $userProjects = Project::model()->findAll($criteria);
+            $this->render('dashboard', array(
+                'projects' => $userProjects, 
+            ));
         }
 
         public function actionEditProfile()

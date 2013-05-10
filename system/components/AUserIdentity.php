@@ -2,6 +2,8 @@
 
     class AUserIdentity extends CUserIdentity
     {
+        private $_id;
+
         public function authenticate()
         {
             $user = new User();

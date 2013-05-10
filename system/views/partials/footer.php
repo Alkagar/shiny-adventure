@@ -5,7 +5,14 @@
 <div class='footer'>
     <ul>
         <li>
-        <?php echo $status; ?>
+        <?php echo $status, ' ( ', Yii::app()->user->model()->id, ' ) '; ?>
+        <?php 
+            $authManager = Yii::app()->authManager;
+            $roles =  $authManager->getRoles(Yii::app()->user->model()->id);
+            foreach($roles as $role) {
+                echo ' [ name: ', $role->name, '; bizRule: ', $role->bizRule, '; data: ', $role->data, ' ]';
+            }
+        ?>
         <li>
     </ul>
 </div>
