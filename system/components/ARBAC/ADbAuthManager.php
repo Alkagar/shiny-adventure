@@ -2,4 +2,4 @@
     class ADbAuthManager extends CDbAuthManager
     {
 
-        }
+    }
