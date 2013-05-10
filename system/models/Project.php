@@ -58,4 +58,23 @@
                 'criteria'=>$criteria,
             ));
         }
+
+        public function beforeValidate() 
+        {
+            if ($this->isNewRecord) {
+                $this->created_at = new CDbExpression('NOW()');
+            } 
+            $this->modified_at = new CDbExpression('NOW()');
+
+            return parent::beforeValidate();
+        }
+
+        public static function getUserProjectsCriteria() 
+        {
+            $criteria = new CDbCriteria();
+            $criteria->addColumnCondition(array(
+                'author_id' => Yii::app()->user->model()->id,
+            ));
+            return $criteria;
+        }
     }

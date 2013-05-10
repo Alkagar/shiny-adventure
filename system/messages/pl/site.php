@@ -21,9 +21,11 @@
         'title.index'              => 'shiny adventure',
         'title.error'              => 'shiny adventure - wystąpił niespodziewany błąd',
         'title.home'               => 'shiny adventure',
-        'title.dashboard'          => 'twój panel dowodzenia',
+        'title.dashboard'          => 'dashboard',
+        'subtitle.your-projects'   => 'twoje projekty',
         'title.edit-profile'       => 'edytuj profil',
         'title.project-add'        => 'dodaj projekt',
+        'title.project-show'                   => 'projekt',
         'title.'                   => '',
 
         'msg.error-code'           => 'kod błędu',

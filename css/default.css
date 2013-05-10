@@ -13,6 +13,12 @@ h1 {
   border-bottom: 1px solid #aaaaaa;
   margin-bottom: 15px; }
 
+h2 {
+  font-size: 110%;
+  font-weight: bold;
+  color: #993300;
+  margin-bottom: 10px; }
+
 .page {
   width: 900px;
   margin: auto auto;
@@ -63,6 +69,11 @@ a:hover {
   width: 25px; }
 .form input[type="checkbox"] {
   width: 25px; }
+.form textarea {
+  width: 250px;
+  padding: 2px;
+  font-size: 10px;
+  height: 75px; }
 .form .row {
   margin-top: 5px; }
 .form .row.submit {
@@ -82,3 +93,6 @@ a:hover {
   padding: 15px;
   background-color: #99ee44;
   border: 1px solid #993300; }
+
+strong {
+  font-weight: bold; }
