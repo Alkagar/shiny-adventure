@@ -6,10 +6,12 @@
             foreach($projects as $project) : 
             $projectLinkShow   = CHtml::link($project->name, array('project/show', 'id' => $project->id));
             $projectLinkRemove = CHtml::link(' ( x ) ', array('project/remove', 'id' => $project->id), array('confirm' => Yii::t('site', 'messages.really-remove')));
-
+            $projectLinkChange = CHtml::link(' ( e ) ', array('project/change', 'id' => $project->id), array());
         ?>
         <div>
-            <strong> <?php echo $projectLinkShow; ?> </strong> <?php echo $projectLinkRemove; ?>
+            <strong> <?php echo $projectLinkShow; ?> </strong>
+            <?php echo $projectLinkChange; ?>,
+            <?php echo $projectLinkRemove; ?>
             <p> 
             <?php echo $project->description; ?>
             </p>

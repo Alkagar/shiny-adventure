@@ -2,6 +2,20 @@
 
     class ProjectController extends AController
     {
+        public function init()
+        {
+            parent::init();
+            // ## check if id was in request, and if so check if project exists for that id, if not throw exception
+            $id = $this->request->getParam('id', null);
+            if(!is_null($id)) {
+                $project = Project::model()->findByPk($id);
+                if(is_null($project)) {
+                    throw new Exception(Yii::t('site', 'error.no-such-project'));
+                }
+            }
+            // ## end
+        }
+
         public function actionAdd()
         {
             $saveResult = false;
@@ -14,7 +28,6 @@
                     $project->author_id = Yii::app()->user->model()->id;
                     $project->name = $form->name;
                     $project->description = $form->description;
-
 
                     $saveResult = $project->save();
                     if($saveResult) {
@@ -35,15 +48,30 @@
         public function actionShow($id)
         {
             $project = Project::model()->findByPk($id);
-            if(is_null($project)) {
-                throw new Exception('Nie ma takiego projektu');
-            }
             $this->render('show', array('project' => $project));
         }
 
-        public function actionChange()
+        public function actionChange($id)
         {
-            $this->render('change');
+            $saveResult = false;
+            $project = Project::model()->findByPk($id);
+            $form = new ProjectForm();
+            if(isset($_POST[get_class($form)])) {
+                $form->attributes = $_POST[get_class($form)];
+                if($form->validate()) {
+                    // add project
+                    $project->name = $form->name;
+                    $project->description = $form->description;
+
+                    $saveResult = $project->save();
+                    if($saveResult) {
+                        Yii::app()->user->setFlash('notification', 'flash.operation-complete');
+                    } else {
+                        Yii::app()->user->setFlash('notification', 'flash.operation-error');
+                    }
+                }
+            }
+            $this->render('change', array('form' => $form, 'saveResult' => $saveResult, 'project' => $project));
         }
 
         public function actionList()

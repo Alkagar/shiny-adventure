@@ -31,6 +31,8 @@
         'msg.error-code'           => 'kod błędu',
         'msg.error-description'    => 'opis błędu',
 
+        'msg.'                  => 'dd',
+
 
         'flash.operation-complete' => 'zmiany zapisano poprawnie',
         'flash.operation-error'    => 'wystąpiły błędy podczas zapisu zmian',
