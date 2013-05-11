@@ -5,12 +5,17 @@
 <div class='footer'>
     <ul>
         <li>
-        <?php echo $status, ' ( ', Yii::app()->user->model()->id, ' ) '; ?>
+        <?php echo $status; ?>
         <?php 
-            $authManager = Yii::app()->authManager;
-            $roles =  $authManager->getRoles(Yii::app()->user->model()->id);
-            foreach($roles as $role) {
-                echo ' [ name: ', $role->name, '; bizRule: ', $role->bizRule, '; data: ', $role->data, ' ]';
+            if(!Yii::app()->user->isGuest) {
+                echo ' ( id: ', Yii::app()->user->id, ' ) ';
+                /*
+                $authManager = Yii::app()->authManager;
+                $roles =  $authManager->getRoles(Yii::app()->user->model()->id);
+                foreach($roles as $role) {
+                    echo ' [ name: ', $role->name, '; bizRule: ', $role->bizRule, '; data: ', $role->data, ' ]';
+                }
+                */
             }
         ?>
         <li>
