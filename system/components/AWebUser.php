@@ -23,11 +23,35 @@
             parent::login($identity, $duration);
             $this->setReturnUrl(Yii::app()->params['dashboardPage']);
             $this->model();
+            $this->setState('__id', $this->model()->id);
         }
 
         protected function afterLogout()
         {
             unset($this->_model);
         }
+
+        /**
+        * Performs access check for this user.
+        * @param string $operation the name of the operation that need access check.
+        * @param int $projectId id of the project, if generic access provide '0'
+        * @param array $params name-value pairs that would be passed to business rules associated
+        * with the tasks and roles assigned to the user.
+        * @return boolean whether the operations can be performed by this user.
+        */
+        public function checkAccess($operation, $projectId = 0, $params = array(), $allowCaching = true)
+        {
+            if($allowCaching && $params===array() && isset($this->_access[$operation][$projectId])) {
+                return $this->_access[$operation][$projectId];
+            }
+
+            $access = Yii::app()->getAuthManager()->checkAccess($operation, $projectId, $this->getId(), $params);
+            if($allowCaching && $params === array()) {
+                $this->_access[$operation][$projectId] = $access;
+            }
+
+            return $access;
+        }
+
     }
 

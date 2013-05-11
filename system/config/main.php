@@ -33,7 +33,7 @@
                 'class' => 'AWebUser',
             ),
             'authManager'=>array(
-                'class'=>'ADbAuthManager',
+                'class'=>'AAuthManager',
                 'connectionID'=>'db',
                 'itemTable'=>'{{auth_item}}',
                 'assignmentTable'=>'{{auth_assignment}}',

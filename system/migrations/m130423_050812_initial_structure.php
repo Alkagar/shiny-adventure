@@ -16,6 +16,7 @@
             $this->addForeignKey('fk_auth_item_child_auth_item_parent', 'auth_item_child', 'parent', 'auth_item', 'name', 'cascade', 'cascade'); 
             $this->addForeignKey('fk_auth_item_child_auth_item_child', 'auth_item_child', 'child', 'auth_item', 'name', 'cascade', 'cascade'); 
             $this->addForeignKey('fk_auth_assignment_auth_item_name', 'auth_assignment', 'itemname', 'auth_item', 'name', 'cascade', 'cascade'); 
+            $this->addForeignKey('fk_auth_assignment_project_project_id', 'auth_assignment', 'project_id', 'project', 'id', 'cascade', 'cascade'); 
 
             $this->addForeignKey('fk_project_user_author_id', 'project', 'author_id', 'user', 'id', 'restrict'); 
 
@@ -33,6 +34,7 @@
             $this->dropForeignKey('fk_auth_item_child_auth_item_parent', 'auth_item_child'); 
             $this->dropForeignKey('fk_auth_item_child_auth_item_child', 'auth_item_child'); 
             $this->dropForeignKey('fk_auth_assignment_auth_item_name', 'auth_assignment'); 
+            $this->dropForeignKey('fk_auth_assignment_project_project_id', 'auth_assignment'); 
             $this->dropForeignKey('fk_project_user_author_id', 'project');
             $this->dropForeignKey('fk_task_user_author_id', 'task');
             $this->dropForeignKey('fk_task_project_project_id', 'task');
@@ -108,7 +110,8 @@
                     'userid'           =>    'varchar(64) not null',
                     'bizrule'          =>    'text',
                     'data'              =>   'text',
-                    'primary key (itemname,userid)',
+                    'project_id'              =>   'int not null',
+                    'primary key (itemname,userid,project_id)',
                 ),
             );
         }

@@ -21,9 +21,7 @@
 
                         // add default auth_assigment to this project only if project saved in db
                         $authManager = Yii::app()->authManager;
-                        $bizRule = 'return $data["project_id"] === $params["project_id"]';
-                        $bizData = array('project_id' => $project->id);
-                        $authManager->assign('project_owner', Yii::app()->user->model()->id, $bizRule, $bizData);
+                        $authManager->assignItem('project_owner', Yii::app()->user->id, $project->id);
 
                         Yii::app()->user->setFlash('notification', 'flash.operation-complete');
                     } else {
