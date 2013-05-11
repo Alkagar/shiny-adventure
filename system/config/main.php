@@ -31,6 +31,7 @@
             'user'=>array(
                 'allowAutoLogin'=>true,
                 'class' => 'AWebUser',
+                'loginUrl' => '/main/login',
             ),
             'authManager'=>array(
                 'class'=>'AAuthManager',
