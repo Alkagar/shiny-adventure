@@ -1,33 +1,12 @@
 <?php
     class AAuthManager extends CApplicationComponent implements IApplicationComponent, IAuthManager
     {
-	/**
-	 * @var string the ID of the {@link CDbConnection} application component. Defaults to 'db'.
-	 * The database must have the tables as declared in "framework/web/auth/*.sql".
-	 */
 	public $connectionID='db';
-	/**
-	 * @var string the name of the table storing authorization items. Defaults to 'AuthItem'.
-	 */
 	public $itemTable='AuthItem';
-	/**
-	 * @var string the name of the table storing authorization item hierarchy. Defaults to 'AuthItemChild'.
-	 */
 	public $itemChildTable='AuthItemChild';
-	/**
-	 * @var string the name of the table storing authorization item assignments. Defaults to 'AuthAssignment'.
-	 */
 	public $assignmentTable='AuthAssignment';
-	/**
-	 * @var CDbConnection the database connection. By default, this is initialized
-	 * automatically as the application component whose ID is indicated as {@link connectionID}.
-	 */
 	public $db;
 
-	/**
-	 * Initializes the application component.
-	 * This method overrides the parent implementation by establishing the database connection.
-	 */
 	public function init()
         {
             parent::init();
@@ -48,7 +27,36 @@
         * with the tasks and roles assigned to the user.
         * @return boolean whether the operations can be performed by the user.
         */
-        public function checkAccess($itemName,$userId,$params=array()){}
+        public function checkAccess($itemName,$userId,$params=array())
+        {
+            return $this->checkAccessRecursive($itemName,$userId,$params);
+        }
+        public function checkAccessRecursive($itemName,$userId,$params=array())
+        {
+            $authItem = $this->getAuthItem($itemName);
+            if(is_null($authItem)) {
+                return false;
+            }
+            if(isset($params['project_id'])) {
+                $projectId = $params['project_id'];
+            } else {
+                $projectId = 0; 
+            }
+            $authAssignment = new AAuthAssignment();
+            $authAssignment->itemname = $itemName;
+            $authAssignment->userid = $userId;
+            $authAssignment->project_id = $projectId;
+            $dataProvider = $authAssignment->search();
+            if($dataProvider->getItemCount() > 0) {
+                return true;
+            }
+            $authItemChildren = $authItem->children;
+            $accessCheck = false;
+            foreach($authItemChildren as $authItemChild) {
+                $accessCheck = $accessCheck || $this->checkAccessRecursive($authItemChild->parent, $userId, $params);
+            }
+            return $accessCheck;
+        }
 
         /**
         * Creates an authorization item.
@@ -88,7 +96,17 @@
         * @param string $name the name of the item
         * @return CAuthItem the authorization item. Null if the item cannot be found.
         */
-        public function getAuthItem($name){}
+        public function getAuthItem($name)
+        {
+            $authItem = new AAuthItem();
+            $authItem->name = $name;
+            $dataProvider = $authItem->search();
+            if($dataProvider->getItemCount() > 0) {
+                $authItems = $dataProvider->getData();
+                return $authItems[0];
+            } 
+            return null;
+        }
         /**
         * Saves an authorization item to persistent storage.
         * @param CAuthItem $item the item to be saved.
@@ -223,22 +241,19 @@
         */
         public function executeBizRule($bizRule,$params,$data){}
 
-
-
-
-
 	/**
 	 * @return CDbConnection the DB connection instance
 	 * @throws CException if {@link connectionID} does not point to a valid application component.
 	 */
 	protected function getDbConnection()
-	{
-		if($this->db!==null)
-			return $this->db;
-		elseif(($this->db=Yii::app()->getComponent($this->connectionID)) instanceof CDbConnection)
-			return $this->db;
-		else
-			throw new CException(Yii::t('yii','CDbAuthManager.connectionID "{id}" is invalid. Please make sure it refers to the ID of a CDbConnection application component.',
-				array('{id}'=>$this->connectionID)));
-	}
+        {
+            if($this->db!==null) {
+                return $this->db;
+            } else if(($this->db=Yii::app()->getComponent($this->connectionID)) instanceof CDbConnection) {
+                return $this->db;
+            } else {
+                throw new CException(Yii::t('yii','CDbAuthManager.connectionID "{id}" is invalid. Please make sure it refers to the ID of a CDbConnection application component.',
+                array('{id}'=>$this->connectionID)));
+            }
+        }
     }

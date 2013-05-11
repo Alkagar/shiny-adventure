@@ -62,4 +62,44 @@
             }
             $this->render('remove');
         }
+
+        public function filters()
+        {
+            return array(
+                'accessControl',
+            );
+        }
+        public function accessRules() 
+        {
+            $projectId = $this->request->getParam('id', 0);
+            $params = array();
+            $params['project_id'] = $projectId;
+            return array(
+                array(
+                    'allow',
+                    'actions' => array('remove',),
+                    'roles' => array('project_owner' => $params),
+                ),
+                array(
+                    'allow',
+                    'actions' => array('change',),
+                    'roles' => array('project_editor' => $params),
+                ),
+                array(
+                    'allow',
+                    'actions' => array('show',),
+                    'roles' => array('project_member' => $params),
+                ),
+                array(
+                    'allow',
+                    'actions' => array('add', 'list',),
+                    'users' => array('@'),
+                ),
+                array(
+                    'deny'
+                ),
+            );
+        }
+
+
     }

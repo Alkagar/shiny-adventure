@@ -1,6 +1,7 @@
 <?php
     class AWebUser extends CWebUser {
         private $_model;
+        private $_access = array();
 
         public function model($refresh = true) 
         {
@@ -39,17 +40,9 @@
         * with the tasks and roles assigned to the user.
         * @return boolean whether the operations can be performed by this user.
         */
-        public function checkAccess($operation, $projectId = 0, $params = array(), $allowCaching = true)
+        public function checkAccess($operation, $params = array(), $allowCaching = true)
         {
-            if($allowCaching && $params===array() && isset($this->_access[$operation][$projectId])) {
-                return $this->_access[$operation][$projectId];
-            }
-
-            $access = Yii::app()->getAuthManager()->checkAccess($operation, $projectId, $this->getId(), $params);
-            if($allowCaching && $params === array()) {
-                $this->_access[$operation][$projectId] = $access;
-            }
-
+            $access = Yii::app()->getAuthManager()->checkAccess($operation, $this->getId(), $params);
             return $access;
         }
 

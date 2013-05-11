@@ -1,11 +1,13 @@
 <?php
     class AController extends CController
     {
-        public $layout='/layouts/main';
+        public $layout = '/layouts/main';
+        public $request;
 
         public function init() 
         {
             parent::init();
+            $this->request = Yii::app()->getRequest();
 
             Yii::app()->language = 'pl';
             
