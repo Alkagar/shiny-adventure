@@ -28,6 +28,31 @@ h2 {
     color:$highlight;
     margin-bottom:10px;
 }
+table#manage-users {
+    width:100%;
+    td {
+        padding:3px;
+        text-align:center;
+        border:1px solid $lighter;
+    }
+    thead {
+        background-color:$basic;
+        color:$contrast;
+    }
+    tbody {
+        tr td:first-child {
+            background-color:$basic;
+            color:$contrast;
+            text-align:left;
+        }
+        tr:hover {
+            td:not(:first-child) {
+                background-color:$contrast;
+                cursor:pointer;
+            }
+        }
+    }
+}
 
 
 .page {
@@ -107,9 +132,6 @@ a:hover {
         font-size:10px;
         height:75px;
     }
-
-
-
     .row {
         margin-top:5px;
     }
@@ -129,7 +151,6 @@ a:hover {
             margin-top:5px;
         }
     }
-
 }
 .notification {
     padding:15px;

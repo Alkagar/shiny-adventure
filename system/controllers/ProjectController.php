@@ -2,20 +2,6 @@
 
     class ProjectController extends AController
     {
-        public function init()
-        {
-            parent::init();
-            // ## check if id was in request, and if so check if project exists for that id, if not throw exception
-            $id = $this->request->getParam('id', null);
-            if(!is_null($id)) {
-                $project = Project::model()->findByPk($id);
-                if(is_null($project)) {
-                    throw new Exception(Yii::t('site', 'error.no-such-project'));
-                }
-            }
-            // ## end
-        }
-
         public function actionAdd()
         {
             $saveResult = false;
@@ -91,6 +77,34 @@
             $this->render('remove');
         }
 
+        public function actionManageUsers($id)
+        {
+            $project = Project::model()->findByPk($id);
+            $users = User::model()->findAll();
+            $roles = AAuthItem::model()->findAll();
+            $this->render('manage-users', array(
+                'project' => $project,
+                'users' => $users,
+                'roles' => $roles,
+            ));
+        }
+
+        // ## controller stuff:
+
+        public function init()
+        {
+            parent::init();
+            // ## check if id was in request, and if so check if project exists for that id, if not throw exception
+            $id = $this->request->getParam('id', null);
+            if(!is_null($id)) {
+                $project = Project::model()->findByPk($id);
+                if(is_null($project)) {
+                    throw new Exception(Yii::t('site', 'error.no-such-project'));
+                }
+            }
+            // ## end
+        }
+
         public function filters()
         {
             return array(
@@ -105,7 +119,7 @@
             return array(
                 array(
                     'allow',
-                    'actions' => array('remove',),
+                    'actions' => array('remove', 'manageUsers', ),
                     'roles' => array('project_owner' => $params),
                 ),
                 array(

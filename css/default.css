@@ -19,6 +19,23 @@ h2 {
   color: #993300;
   margin-bottom: 10px; }
 
+table#manage-users {
+  width: 100%; }
+  table#manage-users td {
+    padding: 3px;
+    text-align: center;
+    border: 1px solid #aaaaaa; }
+  table#manage-users thead {
+    background-color: #333333;
+    color: #dddddd; }
+  table#manage-users tbody tr td:first-child {
+    background-color: #333333;
+    color: #dddddd;
+    text-align: left; }
+  table#manage-users tbody tr:hover td:not(:first-child) {
+    background-color: #dddddd;
+    cursor: pointer; }
+
 .page {
   width: 900px;
   margin: auto auto;

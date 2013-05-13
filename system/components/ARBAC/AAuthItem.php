@@ -52,4 +52,14 @@
                 'criteria'=>$criteria,
             ));
         }
+
+        public function isAssigned($userId, $projectId = 0)
+	{
+            $authAssignment = new AAuthAssignment();
+            $authAssignment->userid = $userId;
+            $authAssignment->itemname = $this->name;
+            $authAssignment->project_id = $projectId;
+            $dp = $authAssignment->search();
+            return $dp->getTotalItemCount() > 0;
+	}
     }
