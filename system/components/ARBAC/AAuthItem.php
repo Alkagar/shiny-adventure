@@ -8,6 +8,7 @@
     */
     class AAuthItem extends CActiveRecord
     {
+
         public static function model($className=__CLASS__)
         {
             return parent::model($className);
@@ -52,6 +53,12 @@
                 'criteria'=>$criteria,
             ));
         }
+
+        public function assign($userId, $projectId = 0)
+	{
+            $auth = Yii::app()->authManager;
+            return $auth->assignItem($this->_name, $userId, $projectId);
+	}
 
         public function isAssigned($userId, $projectId = 0)
 	{

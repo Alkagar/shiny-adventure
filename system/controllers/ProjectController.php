@@ -89,6 +89,48 @@
             ));
         }
 
+        // ## admin actions:
+        public function actionRevokeRoleFromUser($id, $userId, $role) 
+        {
+            header('Content-type: application/json');
+            $jsonResponse = array();
+
+            $authManager = Yii::app()->authManager;
+            $jsonResponse['status'] = 'OK';
+            $jsonResponse['message'] = Yii::t('site', 'flash.operation-complete');
+            try {
+                $authManager->revokeItem($role, $userId, $id);
+            } catch (CException $ex) {
+                $jsonResponse['status'] = 'ERROR';
+                $jsonResponse['message'] = $ex->getMessage();
+            }
+
+            echo CJSON::encode($jsonResponse);
+
+            Yii::app()->end();
+            }
+
+        public function actionAssignRoleToUser($id, $userId, $role) 
+        {
+            header('Content-type: application/json');
+            $jsonResponse = array();
+
+            $authManager = Yii::app()->authManager;
+            $jsonResponse['status'] = 'OK';
+            $jsonResponse['message'] = Yii::t('site', 'flash.operation-complete');
+            try {
+                $authManager->assignItem($role, $userId, $id);
+            } catch (CException $ex) {
+                $jsonResponse['status'] = 'ERROR';
+                $jsonResponse['message'] = $ex->getMessage();
+            }
+            echo CJSON::encode($jsonResponse);
+
+            Yii::app()->end();
+        }
+
+        // ## end
+
         // ## controller stuff:
 
         public function init()
@@ -107,8 +149,10 @@
 
         public function filters()
         {
+            $ajaxOnly = array('assignRoleToUser', 'revokeRoleFromUser');
             return array(
                 'accessControl',
+                'ajaxOnly + ' . join($ajaxOnly, ', '),
             );
         }
         public function accessRules() 
@@ -119,7 +163,7 @@
             return array(
                 array(
                     'allow',
-                    'actions' => array('remove', 'manageUsers', ),
+                    'actions' => array('remove', 'manageUsers', 'assignRoleToUser', 'revokeRoleFromUser'),
                     'roles' => array('project_owner' => $params),
                 ),
                 array(

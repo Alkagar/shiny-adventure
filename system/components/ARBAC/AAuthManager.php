@@ -157,18 +157,23 @@
         public function assign($itemName,$userId,$bizRule=null,$data=null)
         {
             if($this->getAuthItem($itemName) === null) {
-                //throw new CException(Yii::t('yii','The item "{name}" does not exist.',array('{name}' => $itemName)));
+                throw new CException(Yii::t('yii','The item "{name}" does not exist.',array('{name}' => $itemName)));
+            }
+            if( !isset($data['project_id'])) {
+                $data['project_id'] = 0;
             }
 
-            $this->db->createCommand()
-            ->insert($this->assignmentTable, array(
-                'itemname'=>$itemName,
-                'userid'=>$userId,
-                'bizrule'=>$bizRule,
-                'data'=>serialize($data),
-                'project_id' => $data['project_id'],
-            ));
-            //return new CAuthAssignment($this,$itemName,$userId,$bizRule,$data);
+            $authAssignment = new AAuthAssignment();
+            $authAssignment->itemname = $itemName;
+            $authAssignment->userid = $userId;
+            $authAssignment->bizrule = $bizRule;
+            $authAssignment->data = serialize($data);
+            $authAssignment->project_id = $data['project_id'];
+            if(!$authAssignment->save()) {
+                throw new CException(Yii::t('site', 'msg.cannot-save-item-to-db')); 
+            }
+
+            return $authAssignment;
         }
 
         // easy handler for assigning with projectId
@@ -185,7 +190,29 @@
         * @param mixed $userId the user ID (see {@link IWebUser::getId})
         * @return boolean whether removal is successful
         */
-        public function revoke($itemName,$userId){}
+        public function revoke($itemName,$userId)
+        { throw new CExceptin('Not implemented'); }
+
+        public function revokeItem($itemName,$userId, $projectId = 0) 
+        { 
+            if($this->getAuthItem($itemName) === null) {
+                throw new CException(Yii::t('yii','The item "{name}" does not exist.',array('{name}' => $itemName)));
+            }
+
+            $authAssignment = new AAuthAssignment();
+            $authAssignment->itemname = $itemName;
+            $authAssignment->userid = $userId;
+            $authAssignment->project_id = $projectId;
+            $dp = $authAssignment->search();
+            if($dp->getTotalItemCount() ==  1) {
+                $aa = $dp->getData();
+                $authAssignmentItem = $aa[0];
+                return $authAssignmentItem->delete();
+            } else {
+                throw new CException(Yii::t('site', 'msg.inconsistency-in-auth-assignment-table')); 
+            }
+            return false;
+        }
         /**
         * Returns a value indicating whether the item has been assigned to the user.
         * @param string $itemName the item name

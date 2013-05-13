@@ -1,10 +1,7 @@
 <h1><?php echo Yii::t('site', 'title.project-manage-users-of'), ' ', $project->name;?></h1>
 <div>
-    <?php if(Yii::app()->user->hasFlash('notification')):?>
-    <div class='notification'>
-        <?php echo Yii::t('site', Yii::app()->user->getFlash('notification')); ?>
+    <div class='notification' >
     </div>
-    <?php endif; ?>
 
     <table id='manage-users'>
         <thead>
@@ -24,7 +21,7 @@
                     $tds = CHtml::tag('td', array(), $user->mail);
                     foreach($roles as $role) :
                     $assigned = $role->isAssigned($user->id, $project->id);
-                    $tds .= CHtml::tag('td', array(), CHtml::checkbox($role->name, $assigned, array()));
+                    $tds .= CHtml::tag('td', array(), CHtml::checkbox($role->name, $assigned, array('id' => $role->name . '@' . $user->id)));
                     endforeach; 
                     $tr = CHtml::tag('tr', array(), $tds);
                     echo $tr;
@@ -32,6 +29,38 @@
             ?>
         </tbody>
     </table>
-
-
 </div>
+
+<script type='text/javascript'>
+    $('.notification').hide();
+    $('#manage-users input[type="checkbox"]').change(function() {
+            var id = $(this).attr('id'),
+            parts = id.split('@'),
+            userId = parts[1],
+            role = parts[0],
+            success = '<?php echo Yii::t('site', 'flash.operation-complete'); ?>',
+            error = '<?php echo Yii::t('site', 'flash.operation-error'); ?>',
+            onResponse = function(response) {
+                    $('.notification').slideDown().text(response.message);
+                    setTimeout(function(){
+                            $('.notification').slideUp();
+                    }, 2000);
+            },
+            url = '';
+
+
+            if($(this).is(':checked')) {
+                    url = '<?php echo $this->createUrl('project/assignRoleToUser', array('id' => $project->id)); ?>'
+            } else {
+                    url = '<?php echo $this->createUrl('project/revokeRoleFromUser', array('id' => $project->id)); ?>'
+            }
+            $.ajax({
+                    url : url, 
+                    data : {'userId' : userId, 'role' : role},
+                    dataType : 'json',
+                    success : onResponse,
+                    error : onResponse
+            });
+
+    });
+</script>

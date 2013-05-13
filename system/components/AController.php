@@ -16,6 +16,12 @@
             //Yii::app()->attachEventHandler('onException',array($this,'handleError'));
         }
 
+        public function beforeRender($view) 
+        {
+            Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/scripts/jquery.min.js');
+            return true;
+        }
+
         /*
         public function handleError(CEvent $event)
         {        
