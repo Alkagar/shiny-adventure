@@ -4,8 +4,7 @@
     {
         public function actionDashboard()
         {
-            $criteria = Project::getUserProjectsCriteria();
-            $userProjects = Project::model()->findAll($criteria);
+            $userProjects = Project::getUserProjects();
             $this->render('dashboard', array(
                 'projects' => $userProjects, 
             ));

@@ -69,7 +69,27 @@
             return parent::beforeValidate();
         }
 
-        public static function getUserProjectsCriteria() 
+        public function isUserAssigned($itemName, $userId) 
+        {
+            $auth = Yii::app()->authManager;
+            $isAssigned = $auth->checkAccessForProject($itemName, $userId, $this->id);
+            return $isAssigned;
+        }
+
+        public static function getUserProjects($userId = null) 
+        {
+            $userId = is_null($userId) ? Yii::app()->user->id : $userId;
+            $projects = Project::model()->findAll();
+            $userProjects = array();
+            foreach($projects as $project) {
+                if($project->isUserAssigned('project_member', $userId)) {
+                    $userProjects[] = $project;
+                }
+            }
+            return $userProjects;
+        }
+
+        public static function getUserProjectsByAuthorCriteria() 
         {
             $criteria = new CDbCriteria();
             $criteria->addColumnCondition(array(

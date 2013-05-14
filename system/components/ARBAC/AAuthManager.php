@@ -31,6 +31,7 @@
         {
             return $this->checkAccessRecursive($itemName,$userId,$params);
         }
+
         public function checkAccessRecursive($itemName,$userId,$params=array())
         {
             $authItem = $this->getAuthItem($itemName);
@@ -56,6 +57,12 @@
                 $accessCheck = $accessCheck || $this->checkAccessRecursive($authItemChild->parent, $userId, $params);
             }
             return $accessCheck;
+        }
+
+        public function checkAccessForProject($itemName, $userId, $projectId) 
+        {
+            $params = array('project_id' => $projectId);
+            return $this->checkAccess($itemName, $userId, $params);
         }
 
         /**
