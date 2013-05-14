@@ -36,8 +36,10 @@ table#manage-users {
         border:1px solid $lighter;
     }
     thead {
-        background-color:$basic;
         color:$contrast;
+        td:not(:first-child) {
+            background-color:$basic;
+        }
     }
     tbody {
         tr td:first-child {
@@ -156,6 +158,7 @@ a:hover {
     padding:15px;
     background-color:$success;
     border:1px solid $highlight;
+    margin:10px;
 }
 
 

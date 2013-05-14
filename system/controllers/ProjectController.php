@@ -165,16 +165,19 @@
                     'allow',
                     'actions' => array('remove', 'manageUsers', 'assignRoleToUser', 'revokeRoleFromUser'),
                     'roles' => array('project_owner' => $params),
+                    'users' => array('@'),
                 ),
                 array(
                     'allow',
                     'actions' => array('change',),
                     'roles' => array('project_editor' => $params),
+                    'users' => array('@'),
                 ),
                 array(
                     'allow',
                     'actions' => array('show',),
                     'roles' => array('project_member' => $params),
+                    'users' => array('@'),
                 ),
                 array(
                     'allow',

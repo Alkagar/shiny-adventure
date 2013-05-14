@@ -17,15 +17,16 @@
         <tbody>
             <?php
                 foreach($users as $user) :
-                    $tds = '';
-                    $tds = CHtml::tag('td', array(), $user->mail);
-                    foreach($roles as $role) :
-                    $assigned = $role->isAssigned($user->id, $project->id);
-                    $tds .= CHtml::tag('td', array(), CHtml::checkbox($role->name, $assigned, array('id' => $role->name . '@' . $user->id)));
-                    endforeach; 
-                    $tr = CHtml::tag('tr', array(), $tds);
-                    echo $tr;
-                    endforeach;
+                $tds = '';
+                $tds = CHtml::tag('td', array(), $user->mail);
+                foreach($roles as $role) :
+                $assigned = $role->isAssigned($user->id, $project->id);
+                $disabled = 'project_owner' == $role->name && $user->id == Yii::app()->user->id;
+                $tds .= CHtml::tag('td', array(), CHtml::checkbox($role->name, $assigned, array('disabled' => $disabled, 'id' => $role->name . '@' . $user->id)));
+                endforeach; 
+                $tr = CHtml::tag('tr', array(), $tds);
+                echo $tr;
+                endforeach;
             ?>
         </tbody>
     </table>
@@ -47,11 +48,9 @@
                     }, 2000);
             },
             url = '';
-
-
             if($(this).is(':checked')) {
                     url = '<?php echo $this->createUrl('project/assignRoleToUser', array('id' => $project->id)); ?>'
-            } else {
+                } else {
                     url = '<?php echo $this->createUrl('project/revokeRoleFromUser', array('id' => $project->id)); ?>'
             }
             $.ajax({
@@ -61,6 +60,5 @@
                     success : onResponse,
                     error : onResponse
             });
-
     });
 </script>

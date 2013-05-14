@@ -26,8 +26,9 @@ table#manage-users {
     text-align: center;
     border: 1px solid #aaaaaa; }
   table#manage-users thead {
-    background-color: #333333;
     color: #dddddd; }
+    table#manage-users thead td:not(:first-child) {
+      background-color: #333333; }
   table#manage-users tbody tr td:first-child {
     background-color: #333333;
     color: #dddddd;
@@ -109,7 +110,8 @@ a:hover {
 .notification {
   padding: 15px;
   background-color: #99ee44;
-  border: 1px solid #993300; }
+  border: 1px solid #993300;
+  margin: 10px; }
 
 strong {
   font-weight: bold; }
