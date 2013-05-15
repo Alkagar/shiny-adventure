@@ -51,6 +51,11 @@
             if($dataProvider->getItemCount() > 0) {
                 return true;
             }
+            $authAssignment->project_id = 0;
+            $dataProvider = $authAssignment->search();
+            if($dataProvider->getItemCount() > 0) {
+                return true;
+            }
             $authItemChildren = $authItem->children;
             $accessCheck = false;
             foreach($authItemChildren as $authItemChild) {
