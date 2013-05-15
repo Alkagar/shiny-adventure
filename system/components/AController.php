@@ -36,5 +36,24 @@
             $event->handled = TRUE;
         }
         */
+        public function filters()
+        {
+            return array(
+                'accessControl',
+            );
+        }
+        public function accessRules() 
+        {
+            return array(
+                array(
+                    'allow',
+                    'controllers' => array('main'),
+                    'users' => array('*'),
+                ),
+                array(
+                    'deny'
+                ),
+            );
+        }
     }
 

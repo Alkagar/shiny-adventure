@@ -9,7 +9,8 @@
                 <?php 
                     echo CHtml::tag('td', array(), '&nbsp;');
                     foreach($roles as $role) :
-                    echo CHtml::tag('td', array(), $role->name);
+                    $name = $role->name;
+                    echo CHtml::tag('td', array(), AAuthNames::n($name));
                     endforeach; 
                 ?>
             </tr>
@@ -21,7 +22,7 @@
                 $tds = CHtml::tag('td', array(), $user->mail);
                 foreach($roles as $role) :
                 $assigned = $role->isAssigned($user->id, $project->id);
-                $disabled = 'project_owner' == $role->name && $user->id == Yii::app()->user->id;
+                $disabled = 'project_owner' == $role->name && $user->id == $project->author_id;
                 $tds .= CHtml::tag('td', array(), CHtml::checkbox($role->name, $assigned, array('disabled' => $disabled, 'id' => $role->name . '@' . $user->id)));
                 endforeach; 
                 $tr = CHtml::tag('tr', array(), $tds);

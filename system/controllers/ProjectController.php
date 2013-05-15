@@ -82,6 +82,10 @@
             $project = Project::model()->findByPk($id);
             $users = User::model()->findAll();
             $roles = AAuthItem::model()->findAll();
+            $roles = new AAuthItem();
+            $roles->type = AAuthItem::ROLE;
+            $dp = $roles->search();
+            $roles = $dp->getData();
             $this->render('manage-users', array(
                 'project' => $project,
                 'users' => $users,
@@ -163,14 +167,20 @@
             return array(
                 array(
                     'allow',
-                    'actions' => array('remove', 'manageUsers', 'assignRoleToUser', 'revokeRoleFromUser'),
-                    'roles' => array('project_owner' => $params),
+                    'actions' => array('manageUsers', 'assignRoleToUser', 'revokeRoleFromUser', ),
+                    'roles' => array('manage_users_in_project' => $params),
+                    'users' => array('@'),
+                ),
+                array(
+                    'allow',
+                    'actions' => array('remove',),
+                    'roles' => array('remove_project' => $params),
                     'users' => array('@'),
                 ),
                 array(
                     'allow',
                     'actions' => array('change',),
-                    'roles' => array('project_editor' => $params),
+                    'roles' => array('edit_project' => $params),
                     'users' => array('@'),
                 ),
                 array(

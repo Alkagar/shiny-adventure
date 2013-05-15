@@ -14,9 +14,9 @@
         ?>
         <div>
             <ul class='actions'>
-                <?php echo $projectLinkChange; ?>
-                <?php echo $projectLinkRemove; ?>
-                <?php echo $projectLinkManageUsers; ?>
+                <?php echo Yii::app()->user->checkAccess('project_editor', array('project_id' => $project->id)) ? $projectLinkChange : ''; ?>
+                <?php echo Yii::app()->user->checkAccess('project_owner', array('project_id' => $project->id)) ? $projectLinkRemove : ''; ?>
+                <?php echo Yii::app()->user->checkAccess('project_owner', array('project_id' => $project->id)) ? $projectLinkManageUsers : ''; ?>
             </ul>
         </div>
 
@@ -34,7 +34,7 @@
                     $assignments = $project->getUserAssignmentsForProject(Yii::app()->user->id);
                     $roles = array();
                     foreach($assignments as $assignment) {
-                        $roles[] = $assignment->itemname;
+                        $roles[] = AAuthNames::n($assignment->itemname);
                     }
                     echo join($roles, ', ');
                 ?>

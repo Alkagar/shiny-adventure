@@ -9,6 +9,11 @@
     class AAuthItem extends CActiveRecord
     {
 
+        const ADMIN = 3;
+        const ROLE = 2;
+        const TASK = 1;
+        const OPERATION = 0;
+
         public static function model($className=__CLASS__)
         {
             return parent::model($className);

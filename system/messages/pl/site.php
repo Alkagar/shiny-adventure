@@ -42,4 +42,8 @@
         'text.project-yours-roles' => 'twoje role w projekcie',
         'text.' => '',
 
+        'rbac.project_owner' => 'autor',
+        'rbac.project_member' => 'członek',
+        'rbac.project_editor' => 'edytor',
+
     );

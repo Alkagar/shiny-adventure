@@ -45,6 +45,5 @@
             $access = Yii::app()->getAuthManager()->checkAccess($operation, $this->getId(), $params);
             return $access;
         }
-
     }
 
