@@ -15,6 +15,7 @@
             return array(
                 array('name, description', 'required'),
                 array('name', 'length', 'max'=>128),
+                array('time_spent, status_id', 'numerical'),
                 array('name, project_id, parent_id, time_spent, status_id, description', 'safe'),
             );
         }

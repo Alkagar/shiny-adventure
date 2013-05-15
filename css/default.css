@@ -49,23 +49,28 @@ table#manage-users {
 .icons-small:hover {
   background-image: url(../gfx/icons-small-orange.png); }
 
-.icon-small-edit {
+.icon-small-back {
   background-position: 0 0;
   width: 16px;
   height: 16px; }
 
-.icon-small-plus {
+.icon-small-edit {
   background-position: 0 -21px;
   width: 16px;
   height: 16px; }
 
-.icon-small-trash {
+.icon-small-plus {
   background-position: 0 -42px;
   width: 16px;
   height: 16px; }
 
-.icon-small-users {
+.icon-small-trash {
   background-position: 0 -63px;
+  width: 16px;
+  height: 16px; }
+
+.icon-small-users {
+  background-position: 0 -84px;
   width: 16px;
   height: 16px; }
 
@@ -183,6 +188,12 @@ a:hover {
   float: right; }
   .dashboard ul.actions li, .task-list ul.actions li {
     margin: 4px; }
+
+.task-actions {
+  position: relative;
+  top: -35px; }
+  .task-actions li {
+    margin: 0px 5px; }
 
 strong {
   font-weight: bold; }

@@ -66,10 +66,11 @@ table#manage-users {
 
 .icons-small { background: url(../gfx/icons-small.png) no-repeat top left; margin:0px; }
 .icons-small:hover { background-image: url(../gfx/icons-small-orange.png); }
-.icon-small-edit{ background-position: 0 0; width: 16px; height: 16px; } 
-.icon-small-plus{ background-position: 0 -21px; width: 16px; height: 16px; } 
-.icon-small-trash{ background-position: 0 -42px; width: 16px; height: 16px; } 
-.icon-small-users{ background-position: 0 -63px; width: 16px; height: 16px; } 
+.icon-small-back{ background-position: 0 0; width: 16px; height: 16px; } 
+.icon-small-edit{ background-position: 0 -21px; width: 16px; height: 16px; } 
+.icon-small-plus{ background-position: 0 -42px; width: 16px; height: 16px; } 
+.icon-small-trash{ background-position: 0 -63px; width: 16px; height: 16px; } 
+.icon-small-users{ background-position: 0 -84px; width: 16px; height: 16px; } 
 
 .page {
     width:900px;
@@ -228,7 +229,14 @@ a:hover {
         }
     }
 }
-
+.task-actions {
+    position:relative;
+    top:-35px;
+    li {
+        margin:0px 5px;
+    }
+    
+}
 
 strong {
     font-weight:bold;
