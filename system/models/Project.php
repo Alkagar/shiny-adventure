@@ -97,4 +97,13 @@
             ));
             return $criteria;
         }
+
+        public function getUserAssignmentsForProject($userId)
+        {
+            $authAssignment = new AAuthAssignment();
+            $authAssignment->userid = $userId;
+            $authAssignment->project_id = $this->id;
+            $dp = $authAssignment->search();
+            return $dp->getData();
+        }
     }

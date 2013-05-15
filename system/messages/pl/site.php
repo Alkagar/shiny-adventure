@@ -37,4 +37,9 @@
         'flash.operation-complete' => 'zmiany zapisano poprawnie',
         'flash.operation-error'    => 'wystąpiły błędy podczas zapisu zmian',
 
+
+        'text.project-description' => 'opis projektu',
+        'text.project-yours-roles' => 'twoje role w projekcie',
+        'text.' => '',
+
     );

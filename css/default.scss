@@ -5,6 +5,9 @@ $highlight: #993300;
 $error: #C65B5B;
 $success: #99EE44;
 
+$odd: #DEDEDE;
+$even: #e6e6e6;
+
 $background: #EBEBEB;
 html {
 
@@ -24,6 +27,12 @@ h1 {
 }
 h2 {
     font-size:110%;
+    font-weight:bold;
+    color:$highlight;
+    margin-bottom:10px;
+}
+h3 {
+    font-size:100%;
     font-weight:bold;
     color:$highlight;
     margin-bottom:10px;
@@ -56,6 +65,12 @@ table#manage-users {
     }
 }
 
+.icons-small { background: url(../gfx/icons-small.png) no-repeat top left; margin:4px; }
+.icons-small:hover { background-image: url(../gfx/icons-small-orange.png); }
+.icon-small-edit{ background-position: 0 0; width: 16px; height: 16px; } 
+.icon-small-plus{ background-position: 0 -21px; width: 16px; height: 16px; } 
+.icon-small-trash{ background-position: 0 -42px; width: 16px; height: 16px; } 
+.icon-small-users{ background-position: 0 -63px; width: 16px; height: 16px; } 
 
 .page {
     width:900px;
@@ -161,11 +176,42 @@ a:hover {
     margin:10px;
 }
 
-
+.dashboard {
+    .project {
+        h3 {
+            font-size:110%;
+        }
+        margin-bottom:10px;
+        margin-top:10px;
+        padding:10px;
+        min-height:68px;
+            .subtitle {
+                margin:3px 0px;
+                display:block;
+            }
+        .project-description {
+            margin-right:50px;
+            margin-left:10px;
+            font-size:80%;
+        }
+    }
+    .project:nth-child(2n) {
+        background-color:$odd;
+    }
+    .project:nth-child(2n+1) {
+        background-color:$even;
+    }
+    ul.actions {
+        float:right;
+    }
+}
 
 
 strong {
     font-weight:bold;
+}
+.float-left {
+    float:left;
 }
 
 
