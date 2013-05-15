@@ -35,7 +35,6 @@ h3 {
     font-size:100%;
     font-weight:bold;
     color:$highlight;
-    margin-bottom:10px;
 }
 table#manage-users {
     width:100%;
@@ -65,7 +64,7 @@ table#manage-users {
     }
 }
 
-.icons-small { background: url(../gfx/icons-small.png) no-repeat top left; margin:4px; }
+.icons-small { background: url(../gfx/icons-small.png) no-repeat top left; margin:0px; }
 .icons-small:hover { background-image: url(../gfx/icons-small-orange.png); }
 .icon-small-edit{ background-position: 0 0; width: 16px; height: 16px; } 
 .icon-small-plus{ background-position: 0 -21px; width: 16px; height: 16px; } 
@@ -176,33 +175,57 @@ a:hover {
     margin:10px;
 }
 
-.dashboard {
-    .project {
+.dashboard, .task-list {
+    .entry {
+
+        padding:3px 10px;
         h3 {
             font-size:110%;
+            color:$basic;
+            cursor:pointer;
         }
-        margin-bottom:10px;
-        margin-top:10px;
-        padding:10px;
-        min-height:68px;
-            .subtitle {
-                margin:3px 0px;
-                display:block;
-            }
-        .project-description {
+        .subtitle {
+            margin:3px 0px;
+            display:block;
+        }
+        .entry-description {
             margin-right:50px;
             margin-left:10px;
             font-size:80%;
         }
+        .entry-inline-info {
+            display:table-row;
+            margin-left:5px;
+            margin-right:5px;
+            margin-top:-2px;
+            font-size:70%;
+            div.table-cell {
+                vertical-align:middle;
+                text-align:center;
+                margin:0px 10px;
+                height:20px;
+                padding:0px 10px;
+            }
+        }
+        .entry-content {
+            display:none;
+        }
+        &:nth-child(2n) {
+            background-color:$odd;
+        }
+        &:nth-child(2n+1) {
+            background-color:$even;
+        }
     }
-    .project:nth-child(2n) {
-        background-color:$odd;
-    }
-    .project:nth-child(2n+1) {
-        background-color:$even;
+    .entry-with-margins {
+        margin-bottom:10px;
+        margin-top:10px;
     }
     ul.actions {
         float:right;
+        li {
+            margin:4px;
+        }
     }
 }
 
@@ -214,5 +237,14 @@ strong {
     float:left;
 }
 
+.float-right {
+    float:right;
+}
+.table-row {
+    display:table-row;
+}
+.table-cell {
+    display:table-cell;
+}
 
 

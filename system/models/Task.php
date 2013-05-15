@@ -68,4 +68,14 @@
                 'criteria'=>$criteria,
             ));
         }
+
+        public function beforeValidate() 
+        {
+            if ($this->isNewRecord) {
+                $this->created_at = new CDbExpression('NOW()');
+            } 
+            $this->modified_at = new CDbExpression('NOW()');
+
+            return parent::beforeValidate();
+        }
     }

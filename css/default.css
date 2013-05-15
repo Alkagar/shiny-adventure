@@ -22,8 +22,7 @@ h2 {
 h3 {
   font-size: 100%;
   font-weight: bold;
-  color: #993300;
-  margin-bottom: 10px; }
+  color: #993300; }
 
 table#manage-users {
   width: 100%; }
@@ -45,7 +44,7 @@ table#manage-users {
 
 .icons-small {
   background: url(../gfx/icons-small.png) no-repeat top left;
-  margin: 4px; }
+  margin: 0px; }
 
 .icons-small:hover {
   background-image: url(../gfx/icons-small-orange.png); }
@@ -146,29 +145,56 @@ a:hover {
   border: 1px solid #993300;
   margin: 10px; }
 
-.dashboard .project {
-  margin-bottom: 10px;
-  margin-top: 10px;
-  padding: 10px;
-  min-height: 68px; }
-  .dashboard .project h3 {
-    font-size: 110%; }
-  .dashboard .project .subtitle {
+.dashboard .entry, .task-list .entry {
+  padding: 3px 10px; }
+  .dashboard .entry h3, .task-list .entry h3 {
+    font-size: 110%;
+    color: #333333;
+    cursor: pointer; }
+  .dashboard .entry .subtitle, .task-list .entry .subtitle {
     margin: 3px 0px;
     display: block; }
-  .dashboard .project .project-description {
+  .dashboard .entry .entry-description, .task-list .entry .entry-description {
     margin-right: 50px;
     margin-left: 10px;
     font-size: 80%; }
-.dashboard .project:nth-child(2n) {
-  background-color: #dedede; }
-.dashboard .project:nth-child(2n+1) {
-  background-color: #e6e6e6; }
-.dashboard ul.actions {
+  .dashboard .entry .entry-inline-info, .task-list .entry .entry-inline-info {
+    display: table-row;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: -2px;
+    font-size: 70%; }
+    .dashboard .entry .entry-inline-info div.table-cell, .task-list .entry .entry-inline-info div.table-cell {
+      vertical-align: middle;
+      text-align: center;
+      margin: 0px 10px;
+      height: 20px;
+      padding: 0px 10px; }
+  .dashboard .entry .entry-content, .task-list .entry .entry-content {
+    display: none; }
+  .dashboard .entry:nth-child(2n), .task-list .entry:nth-child(2n) {
+    background-color: #dedede; }
+  .dashboard .entry:nth-child(2n+1), .task-list .entry:nth-child(2n+1) {
+    background-color: #e6e6e6; }
+.dashboard .entry-with-margins, .task-list .entry-with-margins {
+  margin-bottom: 10px;
+  margin-top: 10px; }
+.dashboard ul.actions, .task-list ul.actions {
   float: right; }
+  .dashboard ul.actions li, .task-list ul.actions li {
+    margin: 4px; }
 
 strong {
   font-weight: bold; }
 
 .float-left {
   float: left; }
+
+.float-right {
+  float: right; }
+
+.table-row {
+  display: table-row; }
+
+.table-cell {
+  display: table-cell; }

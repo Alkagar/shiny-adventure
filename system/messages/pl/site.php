@@ -40,6 +40,8 @@
 
         'text.project-description' => 'opis projektu',
         'text.project-yours-roles' => 'twoje role w projekcie',
+        'text.task-description' => 'opis zadania',
+        'text.task-status' => 'status zadania',
         'text.' => '',
 
         'rbac.project_owner' => 'autor',
