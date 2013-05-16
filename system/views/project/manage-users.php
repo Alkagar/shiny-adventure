@@ -1,8 +1,8 @@
 <h1><?php echo Yii::t('site', 'title.project-manage-users-of'), ' ', $project->name;?></h1>
 <div>
-    <div class='notification' >
-    </div>
-
+    <ul class='task-actions'>
+        <?php echo AViewHelper::generateMenuButtonsForProject($project); ?>
+    </ul>
     <table id='manage-users'>
         <thead>
             <tr>

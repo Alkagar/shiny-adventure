@@ -16,6 +16,7 @@
             'application.form.*',
             // extended yii's RBAC
             'application.components.ARBAC.*',
+            'application.components.HTML.*',
         ),
 
         'modules'=>array(

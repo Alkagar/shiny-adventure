@@ -3,8 +3,11 @@
 ?>
 <h1><?php echo Yii::t('site', 'title.project-show'), ': ', $project->name;?></h1>
 <div class='task-list'>
+    <ul class='task-actions'>
+        <?php echo AViewHelper::generateMenuButtonsForProject($project); ?>
+    </ul>
     <?php foreach($allTasks as $task) :?>
-    <div class='entry'>
+    <div class='entry clear-both'>
         <div class='entry-inline-info float-right table-row'>
             <div class='table-cell'>
                 <?php echo $task->status->name; ?>

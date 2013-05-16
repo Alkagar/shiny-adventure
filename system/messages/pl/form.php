@@ -9,6 +9,11 @@
         'label.project-name' => 'nazwa projektu',
         'label.project-description' => 'opis projektu',
 
+        'label.task-name' => 'nazwa zadania',
+        'label.task-description' => 'opis zadania', 
+        'label.task-status-id' => 'status zadania',
+        'label.task-time-spent' => 'poświęcony czas',
+
         'common.button.login' => 'zaloguj',
         'common.button.save' => 'zapisz',
 

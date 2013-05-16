@@ -25,14 +25,15 @@
         'subtitle.your-projects'   => 'twoje projekty',
         'title.edit-profile'       => 'edytuj profil',
         'title.project-add'        => 'dodaj projekt',
-        'title.project-change'        => 'zmień projekt',
-        'title.project-show'                   => 'projekt',
+        'title.project-change'     => 'zmień projekt',
+        'title.project-show'       => 'projekt',
+        'title.task-change'        => 'edytuj zadanie',
         'title.'                   => '',
 
         'msg.error-code'           => 'kod błędu',
         'msg.error-description'    => 'opis błędu',
 
-        'msg.'                  => 'dd',
+        'msg.'                     => '',
 
 
         'flash.operation-complete' => 'zmiany zapisano poprawnie',
@@ -42,13 +43,13 @@
         'text.project-description' => 'opis projektu',
         'text.project-yours-roles' => 'twoje role w projekcie',
         'text.project-attachments' => 'załączniku do projektu',
-        'text.add-attachment' => 'dodaj załącznik',
-        'text.task-description' => 'opis zadania',
-        'text.task-status' => 'status zadania',
-        'text.' => '',
+        'text.add-attachment'      => 'dodaj załącznik',
+        'text.task-description'    => 'opis zadania',
+        'text.task-status'         => 'status zadania',
+        'text.'                    => '',
 
-        'rbac.project_owner' => 'autor',
-        'rbac.project_member' => 'członek',
-        'rbac.project_editor' => 'edytor',
+        'rbac.project_owner'       => 'autor',
+        'rbac.project_member'      => 'członek',
+        'rbac.project_editor'      => 'edytor',
 
     );

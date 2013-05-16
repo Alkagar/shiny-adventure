@@ -7,6 +7,7 @@
 
         public function actionAdd($projectId)
         {
+            $project = Project::model()->findByPk($projectId);
             $saveResult = false;
             $form = new TaskForm();
             if(isset($_POST[get_class($form)])) {
@@ -30,7 +31,7 @@
                     }
                 }
             }
-            $this->render('add', array('form' => $form, 'saveResult' => $saveResult));
+            $this->render('add', array('form' => $form, 'saveResult' => $saveResult, 'project' => $project, ));
         }
 
         public function actionChange($id)

@@ -1,5 +1,8 @@
 <h1><?php echo Yii::t('site', 'title.task-add');?></h1>
 <div>
+    <ul class='task-actions'>
+        <?php echo AViewHelper::generateMenuButtonsForProject($project); ?>
+    </ul>
     <div class='form'>
 
         <?php if(Yii::app()->user->hasFlash('notification')):?>
