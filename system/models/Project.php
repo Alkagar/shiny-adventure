@@ -28,6 +28,7 @@
             return array(
                 'author' => array(self::BELONGS_TO, 'User', 'author_id'),
                 'tasks' => array(self::HAS_MANY, 'Task', 'project_id'),
+                'attachments' => array(self::HAS_MANY, 'Attachment', 'belongs_to'),
             );
         }
 

@@ -48,8 +48,24 @@
                     // add project
                     $project->name = $form->name;
                     $project->description = $form->description;
-
                     $saveResult = $project->save();
+
+                    $files = CUploadedFile::getInstancesByName('attachment');
+                    foreach($files as $uploadedFile) {
+                        $name = $uploadedFile->getName();
+                        $name = time() . '_' . str_replace(' ', '_', $name);
+                        $path = Yii::app()->params['projectAttachmentPath'] . $name;
+                        $saveResult = $saveResult && $uploadedFile->saveAs($path);
+                        if($saveResult) {
+                            $attachment = new Attachment();
+                            $attachment->url = $path;
+                            $attachment->author_id = Yii::app()->user->id;
+                            $attachment->belongs_to = $project->id;
+                            $attachment->type = 'project';
+                            $saveResult = $saveResult && $attachment->save();
+                        }
+                    }
+
                     if($saveResult) {
                         Yii::app()->user->setFlash('notification', 'flash.operation-complete');
                     } else {
@@ -58,6 +74,24 @@
                 }
             }
             $this->render('change', array('form' => $form, 'saveResult' => $saveResult, 'project' => $project));
+        }
+
+        public function actionRemoveAttachment($attachmentId) 
+        {
+            header('Content-type: application/json');
+            $jsonResponse = array();
+
+            $attachment = Attachment::model()->findByPk($attachmentId);
+            if(!is_null($attachment) && $attachment->delete()) {
+                unlink($attachment->url);
+                $jsonResponse['status'] = 'OK';
+                $jsonResponse['message'] = Yii::t('site', 'flash.operation-complete');
+            } else {
+                $jsonResponse['status'] = 'ERROR';
+                $jsonResponse['message'] = Yii::t('site', 'flash.operation-error');
+            }
+            echo CJSON::encode($jsonResponse);
+            Yii::app()->end();
         }
 
         public function actionList()
@@ -112,7 +146,7 @@
             echo CJSON::encode($jsonResponse);
 
             Yii::app()->end();
-            }
+        }
 
         public function actionAssignRoleToUser($id, $userId, $role) 
         {
@@ -153,7 +187,7 @@
 
         public function filters()
         {
-            $ajaxOnly = array('assignRoleToUser', 'revokeRoleFromUser');
+            $ajaxOnly = array('assignRoleToUser', 'revokeRoleFromUser', 'removeAttachment');
             return array(
                 'accessControl',
                 'ajaxOnly + ' . join($ajaxOnly, ', '),
@@ -179,7 +213,7 @@
                 ),
                 array(
                     'allow',
-                    'actions' => array('change',),
+                    'actions' => array('change', 'removeAttachment'),
                     'roles' => array('edit_project' => $params),
                     'users' => array('@'),
                 ),

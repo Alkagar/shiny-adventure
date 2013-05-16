@@ -151,10 +151,14 @@ a:hover {
     }
     .row {
         margin-top:5px;
+        .attachment {
+            padding:5px 0px;
+        }
     }
     .row.submit {
         margin-top:15px;
     }
+    
     .errorSummary {
         padding:15px;
         background-color:$error;
@@ -248,11 +252,22 @@ strong {
 .float-right {
     float:right;
 }
+.clear-both {
+    clear:both;
+}
 .table-row {
     display:table-row;
 }
 .table-cell {
     display:table-cell;
 }
-
+.hidden {
+    display:none;
+}
+.cursor {
+    cursor:pointer;
+}
+.padding-left-medium {
+    padding-left:10px;
+}
 

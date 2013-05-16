@@ -25,6 +25,7 @@
         'subtitle.your-projects'   => 'twoje projekty',
         'title.edit-profile'       => 'edytuj profil',
         'title.project-add'        => 'dodaj projekt',
+        'title.project-change'        => 'zmień projekt',
         'title.project-show'                   => 'projekt',
         'title.'                   => '',
 
@@ -40,6 +41,8 @@
 
         'text.project-description' => 'opis projektu',
         'text.project-yours-roles' => 'twoje role w projekcie',
+        'text.project-attachments' => 'załączniku do projektu',
+        'text.add-attachment' => 'dodaj załącznik',
         'text.task-description' => 'opis zadania',
         'text.task-status' => 'status zadania',
         'text.' => '',

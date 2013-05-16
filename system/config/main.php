@@ -76,5 +76,8 @@
             'adminEmail'=>'jakub@mrowiec.org',
             'loginPage' => '/main/login',
             'dashboardPage' => '/user/dashboard',
+
+            'projectAttachmentPath' => 'upload/projects/',
         ),
+
     );

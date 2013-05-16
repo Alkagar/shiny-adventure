@@ -43,6 +43,18 @@
                 ?>
             </div>
         </div>
+        <div>
+            <strong class='subtitle'> <?php echo Yii::t('site', 'text.project-attachments');?>:</strong>
+            <div class='entry-description'>
+                <?php 
+                    $attachments = array();
+                    foreach($project->attachments as $attachment) {
+                        $attachments[] = CHtml::link(substr(basename($attachment->url), 11), array('project/showAttachment', 'id' => $project->id, 'attachmentId' => $attachment->id), array('target' => '_blank', 'title' => Yii::t('site', 'link-title.show-attachment')));
+                    } 
+                    echo join($attachments, ', ');
+                ?>
+            </div>
+        </div>
     </div>
     <?php endforeach; ?>
 </div>
