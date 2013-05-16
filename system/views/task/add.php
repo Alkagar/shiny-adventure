@@ -28,7 +28,7 @@
                 <?php echo CHtml::activeLabel($form,'description'); ?>
             </div>
             <div>
-                <?php echo CHtml::activeTextArea($form,'description', array()); ?>
+                <?php echo AViewHelper::activeMarkdownTextArea($form, 'description'); ?>
             </div>
         </div>
 

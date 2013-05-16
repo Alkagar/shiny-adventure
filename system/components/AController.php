@@ -19,6 +19,9 @@
         public function beforeRender($view) 
         {
             Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/scripts/jquery.min.js');
+            Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/scripts/default.js');
+            Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/cssreset-min.css');
+            Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/default.css');
             return true;
         }
 

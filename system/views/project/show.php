@@ -28,7 +28,7 @@
             <div>
                 <strong class='subtitle'> <?php echo Yii::t('site', 'text.task-description');?>:</strong>
                 <div class='entry-description'>
-                    <?php echo nl2br($task->description); ?>
+                    <?php echo AViewHelper::parseMarkdown($task->description); ?>
                 </div>
             </div>
             <div>

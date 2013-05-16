@@ -47,11 +47,7 @@
                 <?php echo CHtml::activeLabel($form,'description'); ?>
             </div>
             <div>
-                <?php 
-                    echo CHtml::activeTextArea($form,'description', array(
-                        'value' => empty($form->description) ? $task->description : null,
-                    )); 
-                ?>
+                <?php echo AViewHelper::activeMarkdownTextArea($form, 'description', array('value' => empty($form->description) ? $task->description : null,)); ?>
             </div>
         </div>
 

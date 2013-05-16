@@ -119,16 +119,16 @@ a:hover {
 .form input {
   font-size: 10px;
   padding: 2px;
-  width: 250px; }
+  width: 390px; }
 .form input[type="checkbox"] {
   width: 25px; }
 .form input[type="checkbox"] {
   width: 25px; }
 .form textarea {
-  width: 250px;
+  width: 390px;
   padding: 2px;
   font-size: 10px;
-  height: 75px; }
+  height: 100px; }
 .form .row {
   margin-top: 5px; }
   .form .row .attachment {

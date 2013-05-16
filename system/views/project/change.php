@@ -21,8 +21,7 @@
 
         <div class="row">
             <div> <?php echo CHtml::activeLabel($form,'description'); ?> </div>
-            <div> <?php echo CHtml::activeTextArea($form,'description', array( 'value' => empty($form->description) ? $project->description : null,)); ?>
-            </div>
+            <div> <?php echo AViewHelper::activeMarkdownTextArea($form, 'description', array( 'value' => empty($form->description) ? $project->description : null,)); ?> </div>
         </div>
 
         <div class="row">
