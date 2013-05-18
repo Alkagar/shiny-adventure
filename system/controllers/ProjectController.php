@@ -22,7 +22,7 @@
                         $authManager = Yii::app()->authManager;
                         $authManager->assignItem('project_owner', Yii::app()->user->id, $project->id);
 
-                        Yii::app()->user->setFlash('notification', 'flash.operation-complete');
+                        $this->redirect(array('/project/change', 'id' => $project->id));
                     } else {
                         Yii::app()->user->setFlash('notification', 'flash.operation-error');
                     }
@@ -108,7 +108,7 @@
             } else {
                 Yii::app()->user->setFlash('notification', 'flash.operation-error');
             }
-            $this->render('remove');
+            $this->render('remove', array('project' => $project));
         }
 
         public function actionManageUsers($id)

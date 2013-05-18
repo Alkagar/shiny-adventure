@@ -25,7 +25,7 @@
 
                     $saveResult = $task->save();
                     if($saveResult) {
-                        Yii::app()->user->setFlash('notification', 'flash.operation-complete');
+                        $this->redirect(array('/task/change', 'id' => $task->id, 'projectId' => $task->project_id));
                     } else {
                         Yii::app()->user->setFlash('notification', 'flash.operation-error');
                     }
@@ -113,9 +113,16 @@
             Yii::app()->end();
         }
 
-        public function actionRemove()
+        public function actionRemove($id)
         {
-            $this->render('remove');
+            $task = Task::model()->findByPk($id);
+            $result = $task->delete();
+            if($result) {
+                Yii::app()->user->setFlash('notification', 'flash.operation-remove-complete');
+            } else {
+                Yii::app()->user->setFlash('notification', 'flash.operation-remove-error');
+            }
+            $this->render('remove', array('task' => $task));
         }
 
         public function init()
@@ -156,7 +163,22 @@
         {
             $params = array();
             $params['project_id'] = $this->_projectId;
+            $params['task_id'] = $this->_id;
+            $params['user_id'] = Yii::app()->user->id;
             return array(
+                array(
+                    'allow',
+                    'actions' => array('remove',),
+                    'roles' => array('remove_all_tasks' => $params),
+                    'users' => array('@'),
+                ),
+                array(
+                    'allow',
+                    'actions' => array('remove',),
+                    'roles' => array('remove_own_tasks' => $params),
+                    'expression' => array('AAuthExpressions', 'isTaskAuthor'),
+                    'users' => array('@'),
+                ),
                 array(
                     'allow',
                     'actions' => array('add',),

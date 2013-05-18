@@ -44,8 +44,9 @@
         'text.project-yours-roles' => 'twoje role w projekcie',
         'text.project-attachments' => 'załączniku do projektu',
         'text.add-attachment'      => 'dodaj załącznik',
-        'text.task-description'    => 'opis zadania',
-        'text.task-status'         => 'status zadania',
+        'text.task-description'    => 'opis',
+        'text.task-status'         => 'status',
+        'text.task-author'                    => 'autor',
         'text.'                    => '',
         'text.task-assignees'                    => 'osoby przypisane',
 

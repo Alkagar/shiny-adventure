@@ -1,7 +1,7 @@
 <h1><?php echo Yii::t('site', 'title.task-change');?></h1>
 <div>
     <ul class='task-actions'>
-        <?php echo AViewHelper::generateMenuButtonsForTask($task); ?>
+        <?php echo ATaskHelper::generateMenuButtonsForTask($task); ?>
     </ul>
     <div class='form'>
 

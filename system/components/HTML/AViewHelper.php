@@ -10,6 +10,9 @@
                 'confirm' => Yii::t('site', 'messages.really-remove'), 
                 'title' => Yii::t('site', 'link-title.remove-project'),
             ));
+            if(is_null(Project::model()->findByPk($project->id))) {
+                $linkRemove = '';
+            }
 
             $icon = CHtml::tag('li', array('class' => 'icons-small icon-small-plus',), '');
             $linkAddTask = CHtml::link($icon, array('task/add', 'projectId' => $project->id), array(
@@ -44,35 +47,6 @@
             return $html;
         }
 
-        public static function generateMenuButtonsForTask($task)
-        {
-            $params = array('project_id' => $task->project_id);
-
-            $icon = CHtml::tag('li', array('class' => 'icons-small icon-small-trash',), '');
-            $linkRemove = CHtml::link($icon, array('task/remove', 'id' => $task->id), array(
-                'class' => 'float-right title-buttons', 
-                'confirm' => Yii::t('site', 'messages.really-remove'), 
-                'title' => Yii::t('site', 'link-title.remove-task'),
-            ));
-
-            $icon = CHtml::tag('li', array('class' => 'icons-small icon-small-plus',), '');
-            $linkAddTask = CHtml::link($icon, array('task/add', 'projectId' => $task->project_id), array(
-                'class' => 'float-right title-buttons', 
-                'title' => Yii::t('site', 'link-title.add-task'),
-            ));
-
-            $icon = CHtml::tag('li', array('class' => 'icons-small icon-small-back',), '');
-            $linkGoBack = CHtml::link($icon, array('project/show', 'id' => $task->project_id), array(
-                'class' => 'float-right title-buttons', 
-                'title' => Yii::t('site', 'link-title.go-back-to-project'),
-            ));
-
-            $html = '';
-            $html .= Yii::app()->user->checkAccess('remove_own_task', $params) ? $linkRemove : '';
-            $html .= $linkGoBack;
-            $html .= Yii::app()->user->checkAccess('add_task', $params) ? $linkAddTask : '';
-            return $html;
-        }
 
         public static function parseMarkdown($text)
         {
@@ -101,6 +75,7 @@
             ";
             return $html;
         }
+
         public static function dropDownUserList($fieldName, $selected = '', $htmlOptions = array())
         {
             $users = User::model()->findAll();
