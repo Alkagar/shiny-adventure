@@ -16,7 +16,9 @@
             setTimeout(function(){
                 notification.slideUp('slow', function() { 
                     notification.remove(); 
-                    closeCallback();
+                    if(closeCallback !== 'undefined') {
+                        closeCallback();
+                    }
                 });
             }, 4000);
         }

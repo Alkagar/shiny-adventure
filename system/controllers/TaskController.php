@@ -61,6 +61,58 @@
             $this->render('change', array('form' => $form, 'saveResult' => $saveResult, 'task' => $task));
         }
 
+        public function actionRemoveAssigneeFromTask($id, $userId)
+        {
+            header('Content-type: application/json');
+            $jsonResponse = array();
+
+            $assignee = new Assignee();
+            $assignee->task_id = $id;
+            $assignee->user_id = $userId;
+            $dp = $assignee->search();
+            if(1 == $dp->getTotalItemCount()) {
+                $assigneeToRemove = $dp->getData();
+                $assigneeToRemove = $assigneeToRemove[0];
+                if($assigneeToRemove->delete()) {
+                    $jsonResponse['status'] = 'OK';
+                    $jsonResponse['message'] = Yii::t('site', 'flash.operation-complete');
+                } else {
+                    $jsonResponse['status'] = 'ERROR';
+                    $jsonResponse['message'] = Yii::t('site', 'flash.operation-error');
+                }
+            } else {
+                $jsonResponse['status'] = 'ERROR';
+                $jsonResponse['message'] = Yii::t('site', 'flash.operation-error');
+            }
+
+            echo CJSON::encode($jsonResponse);
+
+            Yii::app()->end();
+        }
+
+        public function actionAddAssigneeToTask($id, $userId)
+        {
+            header('Content-type: application/json');
+            $jsonResponse = array();
+
+            $assignee = new Assignee();
+            $assignee->task_id = $id;
+            $assignee->user_id = $userId;
+            $dp = $assignee->search();
+            if(0 == $dp->getTotalItemCount() && $assignee->save() ) {
+                $jsonResponse['status'] = 'OK';
+                $jsonResponse['message'] = Yii::t('site', 'flash.operation-complete');
+                $jsonResponse['removeLink'] = $this->createUrl('task/removeAssigneeFromTask', array('id' => $id, 'userId' => $userId));
+            } else {
+                $jsonResponse['status'] = 'ERROR';
+                $jsonResponse['message'] = Yii::t('site', 'flash.operation-error');
+            }
+
+            echo CJSON::encode($jsonResponse);
+
+            Yii::app()->end();
+        }
+
         public function actionRemove()
         {
             $this->render('remove');
@@ -94,8 +146,10 @@
 
         public function filters()
         {
+            $ajaxOnly = array('addAssigneeToTask', 'removeAssigneeFromTask');
             return array(
                 'accessControl',
+                'ajaxOnly + ' . join($ajaxOnly, ', '),
             );
         }
         public function accessRules() 
@@ -111,7 +165,7 @@
                 ),
                 array(
                     'allow',
-                    'actions' => array('change',),
+                    'actions' => array('change', 'addAssigneeToTask', 'removeAssigneeFromTask', ),
                     'roles' => array('edit_own_tasks' => $params),
                     'users' => array('@'),
                 ),

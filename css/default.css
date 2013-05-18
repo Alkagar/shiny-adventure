@@ -115,11 +115,15 @@ a:hover {
 .form label {
   padding: 4px;
   padding-left: 14px;
-  color: #333333; }
+  color: #333333;
+  font-weight: bold; }
 .form input {
   font-size: 10px;
   padding: 2px;
   width: 390px; }
+.form select {
+  margin: 0px;
+  width: 300px; }
 .form input[type="checkbox"] {
   width: 25px; }
 .form input[type="checkbox"] {
@@ -130,6 +134,7 @@ a:hover {
   font-size: 10px;
   height: 100px; }
 .form .row {
+  clear: both;
   margin-top: 5px; }
   .form .row .attachment {
     padding: 5px 0px; }
@@ -165,6 +170,11 @@ a:hover {
     margin-right: 50px;
     margin-left: 10px;
     font-size: 80%; }
+    .dashboard .entry .entry-description h2, .task-list .entry .entry-description h2 {
+      margin-top: 10px;
+      margin-left: 15px; }
+    .dashboard .entry .entry-description p, .task-list .entry .entry-description p {
+      margin-left: 25px; }
   .dashboard .entry .entry-inline-info, .task-list .entry .entry-inline-info {
     display: table-row;
     margin-left: 5px;

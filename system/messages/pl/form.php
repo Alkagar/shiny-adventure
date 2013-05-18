@@ -13,6 +13,7 @@
         'label.task-description' => 'opis zadania', 
         'label.task-status-id' => 'status zadania',
         'label.task-time-spent' => 'poświęcony czas',
+        'label.task-assignees' => 'osoby przypisane do zadania',
 
         'common.button.login' => 'zaloguj',
         'common.button.save' => 'zapisz',

@@ -37,6 +37,12 @@
                     <?php echo $task->status->name; ?>
                 </div>
             </div>
+            <div>
+                <strong class='subtitle'> <?php echo Yii::t('site', 'text.task-assignees');?>:</strong>
+                <div class='entry-description'>
+                    <?php echo ATaskHelper::taskListAssigneesHtml($task); ?>
+                </div>
+            </div>
         </div>
     </div>
     <?php endforeach; ?>

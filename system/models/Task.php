@@ -30,6 +30,7 @@
                 'project' => array(self::BELONGS_TO, 'Project', 'project_id'),
                 'status' => array(self::BELONGS_TO, 'Status', 'status_id'),
                 'author' => array(self::BELONGS_TO, 'User', 'author_id'),
+                'assignees' => array(self::HAS_MANY, 'Assignee', 'task_id'),
             );
         }
 

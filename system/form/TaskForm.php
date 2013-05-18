@@ -8,6 +8,7 @@
         public $time_spent;
         public $parent_id;
         public $status_id;
+        public $assignees;
 
 
         public function rules()
@@ -29,6 +30,8 @@
                 'parent_id' => Yii::t('form', 'label.task-parent-id'),
                 'time_spent' => Yii::t('form', 'label.task-time-spent'),
                 'status_id' => Yii::t('form', 'label.task-status-id'),
+                'assignees' => Yii::t('form', 'label.task-assignees'),
+
             );
         }
 

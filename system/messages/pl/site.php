@@ -47,6 +47,7 @@
         'text.task-description'    => 'opis zadania',
         'text.task-status'         => 'status zadania',
         'text.'                    => '',
+        'text.task-assignees'                    => 'osoby przypisane',
 
         'rbac.project_owner'       => 'autor',
         'rbac.project_member'      => 'członek',

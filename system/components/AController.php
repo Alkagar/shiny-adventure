@@ -50,7 +50,7 @@
             return array(
                 array(
                     'allow',
-                    'controllers' => array('main'),
+                    'controllers' => array('main', 'gii'),
                     'users' => array('*'),
                 ),
                 array(
