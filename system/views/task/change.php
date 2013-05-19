@@ -1,10 +1,10 @@
 <h1><?php echo Yii::t('site', 'title.task-change');?></h1>
-<div>
     <ul class='task-actions'>
         <?php echo ATaskHelper::generateMenuButtonsForTask($task); ?>
     </ul>
-    <div class='form'>
+<div class='grid-row'>
 
+    <div class='form column grid-5'>
         <?php if(Yii::app()->user->hasFlash('notification')):?>
         <div class='notification'>
             <?php echo Yii::t('site', Yii::app()->user->getFlash('notification')); ?>
@@ -32,7 +32,7 @@
                 <?php echo CHtml::activeLabel($form,'description'); ?>
             </div>
             <div>
-                <?php echo AViewHelper::activeMarkdownTextArea($form, 'description', array('value' => empty($form->description) ? $task->description : null,)); ?>
+                <?php echo AViewHelper::activeMarkdownTextArea($form, 'description', array('value' => empty($form->description) ? $task->description : null,), false); ?>
             </div>
         </div>
 
@@ -84,6 +84,10 @@
 
         <?php echo CHtml::endForm(); ?>
     </div><!-- form -->
+    <div class='grid-5 column '>
+<div id="wmd-preview" class=" wmd-panel wmd-preview"></div>
+    </div>
+
 </div>
 
 <script type='text/javascript'>

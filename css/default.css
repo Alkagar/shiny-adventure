@@ -75,7 +75,7 @@ table#manage-users {
   height: 16px; }
 
 .page {
-  width: 900px;
+  width: 980px;
   margin: auto auto;
   text-align: left;
   border: 1px solid #333333; }
@@ -123,7 +123,7 @@ a:hover {
   width: 390px; }
 .form select {
   margin: 0px;
-  width: 300px; }
+  width: 370px; }
 .form input[type="checkbox"] {
   width: 25px; }
 .form input[type="checkbox"] {
@@ -233,3 +233,49 @@ strong {
 
 .padding-left-medium {
   padding-left: 10px; }
+
+.grid-1 {
+  width: 86px; }
+
+.grid-2 {
+  width: 182px; }
+
+.grid-3 {
+  width: 278px; }
+
+.grid-4 {
+  width: 374px; }
+
+.grid-5 {
+  width: 470px; }
+
+.grid-6 {
+  width: 566px; }
+
+.grid-7 {
+  width: 662px; }
+
+.grid-8 {
+  width: 758px; }
+
+.grid-9 {
+  width: 854px; }
+
+.grid-10 {
+  width: 950px; }
+
+.column {
+  margin: 0 5px 0 5px;
+  overflow: hidden;
+  float: left;
+  display: inline; }
+
+.grid-row {
+  width: 960px;
+  margin: 0 auto;
+  overflow: hidden; }
+
+.grid-row .grid-row {
+  margin: 0 -5px 0 -5px;
+  width: auto;
+  display: inline-block; }

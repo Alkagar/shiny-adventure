@@ -55,7 +55,7 @@
             return $html;
         }
 
-        public static function activeMarkdownTextArea($model, $field, $htmlOptions = array())
+        public static function activeMarkdownTextArea($model, $field, $htmlOptions = array(), $preview = true)
         {
             Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/Markdown.Style.css');
             Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/scripts/Markdown.Converter.js');
@@ -65,12 +65,14 @@
             $htmlOptions['id'] = 'wmd-input';
             $html = '<div id="wmd-button-bar"></div>';
             $html .= CHtml::activeTextArea($model, $field, $htmlOptions);
-            $html .= '<div id="wmd-preview" class="float-right wmd-panel wmd-preview"></div>';
+            $html .= $preview ? '<div id="wmd-preview" class="float-right wmd-panel wmd-preview"></div>' : '';
             $html .= "
             <script type='text/javascript'>
-                var converter = Markdown.getSanitizingConverter();
-                var editor = new Markdown.Editor(converter);
-                editor.run();
+                $(document).ready(function() {
+                    var converter = Markdown.getSanitizingConverter();
+                    var editor = new Markdown.Editor(converter);
+                    editor.run();
+                });
             </script>
             ";
             return $html;
