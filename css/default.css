@@ -234,6 +234,16 @@ strong {
 .padding-left-medium {
   padding-left: 10px; }
 
+.task-notes time {
+  font-size: 80%;
+  text-decoration: underline;
+  display: block; }
+  .task-notes time:after {
+    content: ":"; }
+.task-notes .task-note {
+  font-size: 90%;
+  margin: -2px 10px; }
+
 .grid-1 {
   width: 86px; }
 

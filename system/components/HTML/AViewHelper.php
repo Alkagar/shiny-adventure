@@ -78,6 +78,29 @@
             return $html;
         }
 
+        public static function markdownTextArea($fieldName, $fieldNamePrefix, $htmlOptions = array(), $preview = true)
+        {
+            Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/Markdown.Style.css');
+            Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/scripts/Markdown.Converter.js');
+            Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/scripts/Markdown.Sanitizer.js');
+            Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/scripts/Markdown.Editor.js');
+
+            $htmlOptions['id'] = 'wmd-input' . $fieldNamePrefix;
+            $html = '<div id="wmd-button-bar'.$fieldNamePrefix.'"></div>';
+            $html .= CHtml::textArea($fieldName, '', $htmlOptions);
+            $html .= $preview ? '<div id="wmd-preview"'.$fieldNamePrefix.' class="wmd-panel wmd-preview"></div>' : '';
+            $html .= "
+            <script type='text/javascript'>
+                $(document).ready(function() {
+                    var converter = Markdown.getSanitizingConverter();
+                    var editor = new Markdown.Editor(converter, '$fieldNamePrefix');
+                    editor.run();
+                });
+            </script>
+            ";
+            return $html;
+        }
+
         public static function dropDownUserList($fieldName, $selected = '', $htmlOptions = array())
         {
             $users = User::model()->findAll();

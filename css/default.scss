@@ -284,8 +284,20 @@ strong {
     padding-left:10px;
 }
 
-
-
+.task-notes {
+    time {
+        font-size:80%;
+        text-decoration:underline;
+        display:block;
+        &:after {
+            content:":";
+        }
+    }
+    .task-note {
+        font-size:90%;
+        margin:-2px 10px;
+    }
+}
 
     .grid-1 {width: 86px;}
     .grid-2 {width: 182px;}

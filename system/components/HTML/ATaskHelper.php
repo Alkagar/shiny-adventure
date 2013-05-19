@@ -27,6 +27,17 @@
             }
             return $html;
         }
+        public static function taskShowNotes($task) 
+        {
+            $html = '';
+            foreach($task->taskNotes as $taskNote) {
+                $content = AViewHelper::parseMarkdown($taskNote->content);
+                $taskContent = CHtml::tag('div', array('class' => 'task-note'), $content);
+                $taskDate = CHtml::tag('time', array('class' => 'task-note-date'), $taskNote->created_at);
+                $html = $taskDate . $taskContent . $html;
+            }
+            return $html;
+        }
 
         public static function generateMenuButtonsForTask($task)
         {

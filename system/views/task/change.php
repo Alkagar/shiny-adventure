@@ -1,7 +1,7 @@
 <h1><?php echo Yii::t('site', 'title.task-change');?></h1>
-    <ul class='task-actions'>
-        <?php echo ATaskHelper::generateMenuButtonsForTask($task); ?>
-    </ul>
+<ul class='task-actions'>
+    <?php echo ATaskHelper::generateMenuButtonsForTask($task); ?>
+</ul>
 <div class='grid-row'>
 
     <div class='form column grid-5'>
@@ -62,7 +62,7 @@
             <div>
                 <?php echo CHtml::activeLabel($form,'assignees'); ?>
             </div>
-                <?php echo ATaskHelper::taskShowAssigneesHtml($task); ?>
+            <?php echo ATaskHelper::taskShowAssigneesHtml($task); ?>
             <div class='clear-both'>
                 <?php 
                     $addUsersIcon = CHtml::tag('div', array('class' => 'float-left icons-small cursor icon-small-plus add-assignee',), '');
@@ -84,13 +84,45 @@
 
         <?php echo CHtml::endForm(); ?>
     </div><!-- form -->
-    <div class='grid-5 column '>
-<div id="wmd-preview" class=" wmd-panel wmd-preview"></div>
+
+    <div class='grid-5 column form task-notes'>
+
+        <br /> <br /> <br /> <br /> <br /> <br /> <br />
+        <div id="wmd-preview" class=" wmd-panel wmd-preview"></div>
+        <br /><br />
+        <?php echo AViewHelper::markdownTextArea('task-note','-note', array(), false); ?>
+        <?php echo CHtml::button(Yii::t('form', 'common.button.add-note'), array('id' => 'add-note', 'name' => 'add-note', ));?>
+        <?php echo ATaskHelper::taskShowNotes($task); ?>
     </div>
 
 </div>
 
 <script type='text/javascript'>
+    $('#add-note').click(function() {
+            var textarea = $('[name="task-note"]'),
+            button = $(this),
+            content = textarea.val(),
+            parentDiv = textarea.parent('.form');
+            taskId = <?php echo $task->id; ?>;
+
+            $.ajax({
+                    url : '<?php echo $this->createUrl('task/addTaskNote', array('id' => $task->id)); ?>',
+                    data : { id : taskId, content: content},
+                    type : 'POST',
+                    dataType : 'json',
+                    success : function(response) {
+                            SH.showNotification(response.message);
+                            noteContent = $('<div></div>').addClass('task-note').text(content);
+                            textarea.val('');
+                            noteDate = $('<time></time>').addClass('task-note-date').text(response.created_at);
+                            button.after(noteDate);
+                            noteDate.after(noteContent);
+                    },
+                    error : function(response) {
+                            SH.showNotification(response.message);
+                    }
+            });
+    });
     $('.add-assignee').click(function() {
             var add = $(this),
             select = add.prev('select'),
@@ -104,32 +136,32 @@
                     success : function(response) {
                             if(response.status == 'OK') {
                                     var removeLink = response.removeLink,
-                                    removeDiv = $('<div />').addClass('remove-assignee attachment cursor clear-both').text(select.find(':selected').text()).attr('id', 'remove-assignee_' + userId);
+                                    removeDiv = $('<div></div>').addClass('remove-assignee attachment cursor clear-both').text(select.find(':selected').text()).attr('id', 'remove-assignee_' + userId);
                                     parentDiv.before(removeDiv);
                             }
                             SH.showNotification(response.message);
-                        },
-                        error : function(response) {
+                    },
+                    error : function(response) {
                             SH.showNotification(response.message);
-                        }
-                });
-        });
-        $(document).on('click', '.remove-assignee', function() {
-                var taskId = <?php echo $task->id; ?>,
-                removeElement = $(this),
-                parts = removeElement.attr('id').split('_'),
-                userId = parts[1];
-                $.ajax({
-                        url : '<?php echo $this->createUrl('task/removeAssigneeFromTask'); ?>',
-                        data : { id : taskId, userId : userId},
-                        dataType : 'json',
-                        success : function(response) {
-                                removeElement.remove();
-                                SH.showNotification(response.message);
-                        },
-                        error : function(response) {
-                                alert(response.message);
-                        }
-                });
-        });
-    </script>
+                    }
+            });
+    });
+    $(document).on('click', '.remove-assignee', function() {
+            var taskId = <?php echo $task->id; ?>,
+            removeElement = $(this),
+            parts = removeElement.attr('id').split('_'),
+            userId = parts[1];
+            $.ajax({
+                    url : '<?php echo $this->createUrl('task/removeAssigneeFromTask'); ?>',
+                    data : { id : taskId, userId : userId},
+                    dataType : 'json',
+                    success : function(response) {
+                            removeElement.remove();
+                            SH.showNotification(response.message);
+                    },
+                    error : function(response) {
+                            alert(response.message);
+                    }
+            });
+    });
+</script>

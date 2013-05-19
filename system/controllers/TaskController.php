@@ -34,6 +34,35 @@
             $this->render('add', array('form' => $form, 'saveResult' => $saveResult, 'project' => $project, ));
         }
 
+        public function actionAddTaskNote($id)
+        {
+            header('Content-type: application/json');
+            $jsonResponse = array();
+            $taskId = $id;
+            $userId = Yii::app()->user->id;
+            $content = $this->request->getParam('content', null);
+            if(is_null($content) || empty($content)) {
+                $jsonResponse['status'] = 'ERROR';
+                $jsonResponse['message'] = Yii::t('site', 'flash.operation-error');
+            } else {
+                $taskNote = new TaskNote();
+                $taskNote->task_id = $taskId;
+                $taskNote->author_id = $userId;
+                $taskNote->content = $content;
+                if($taskNote->save()) {
+                    $taskNote = TaskNote::model()->findByPk($taskNote->id);
+                    $jsonResponse['status'] = 'OK';
+                    $jsonResponse['message'] = Yii::t('site', 'flash.operation-complete');
+                    $jsonResponse['created_at'] = $taskNote->created_at;
+                } else {
+                    $jsonResponse['status'] = 'ERROR';
+                    $jsonResponse['message'] = Yii::t('site', 'flash.operation-error');
+                }
+            } 
+            echo CJSON::encode($jsonResponse);
+            Yii::app()->end();
+        }
+
         public function actionChange($id)
         {
             $saveResult = false;
@@ -153,7 +182,7 @@
 
         public function filters()
         {
-            $ajaxOnly = array('addAssigneeToTask', 'removeAssigneeFromTask');
+            $ajaxOnly = array('addAssigneeToTask', 'removeAssigneeFromTask', 'addTaskNote');
             return array(
                 'accessControl',
                 'ajaxOnly + ' . join($ajaxOnly, ', '),
@@ -181,7 +210,13 @@
                 ),
                 array(
                     'allow',
-                    'actions' => array('add',),
+                    'actions' => array('addTaskNote', ),
+                    'roles' => array('add_task' => $params),
+                    'users' => array('@'),
+                ),
+                array(
+                    'allow',
+                    'actions' => array('add', ),
                     'roles' => array('add_task' => $params),
                     'users' => array('@'),
                 ),
