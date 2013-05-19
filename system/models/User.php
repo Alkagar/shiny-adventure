@@ -31,6 +31,7 @@
                 'projects' => array(self::HAS_MANY, 'Project', 'author_id'),
                 'tasks' => array(self::HAS_MANY, 'Task', 'author_id'),
                 'status' => array(self::BELONGS_TO, 'Status', 'status_id'),
+                'taskNotes' => array(self::HAS_MANY, 'TaskNote', 'author_id'),
             );
         }
 

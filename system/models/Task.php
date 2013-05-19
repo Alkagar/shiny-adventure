@@ -31,22 +31,7 @@
                 'status' => array(self::BELONGS_TO, 'Status', 'status_id'),
                 'author' => array(self::BELONGS_TO, 'User', 'author_id'),
                 'assignees' => array(self::HAS_MANY, 'Assignee', 'task_id'),
-            );
-        }
-
-        public function attributeLabels()
-        {
-            return array(
-                'id' => 'ID',
-                'name' => 'Name',
-                'description' => 'Description',
-                'project_id' => 'Project',
-                'time_spent' => 'Time Spent',
-                'author_id' => 'Author',
-                'parent_id' => 'Parent',
-                'created_at' => 'Created At',
-                'modified_at' => 'Modified At',
-                'status_id' => 'Status',
+                'taskNotes' => array(self::HAS_Many, 'TaskNote', 'task_id'),
             );
         }
 
