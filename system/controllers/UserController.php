@@ -5,8 +5,13 @@
         public function actionDashboard()
         {
             $userProjects = Project::getUserProjects();
+            $assignees = new Assignee();
+            $assignees->user_id = Yii::app()->user->id;
+            $dp = $assignees->search();
+            $userAssignees = $dp->getData();
             $this->render('dashboard', array(
                 'projects' => $userProjects, 
+                'assignees' => $userAssignees,
             ));
         }
 

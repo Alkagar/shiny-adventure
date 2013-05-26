@@ -30,6 +30,8 @@
         'title.task-change'        => 'edytuj zadanie',
         'title.'                   => '',
 
+
+
         'msg.error-code'           => 'kod błędu',
         'msg.error-description'    => 'opis błędu',
 
@@ -47,8 +49,12 @@
         'text.task-description'    => 'opis',
         'text.task-status'         => 'status',
         'text.task-author'                    => 'autor',
-        'text.'                    => '',
         'text.task-assignees'                    => 'osoby przypisane',
+        'text.task-note-by'     => 'dodane przez',
+        'text.task-note-on' => 'dnia',
+        'text.subtitle-dashboard-projects'                    => 'twoje projekty',
+        'text.subtitle-dashboard-tasks'                    => 'twoje zadania',
+        'text.'                    => '',
 
         'rbac.project_owner'       => 'autor',
         'rbac.project_member'      => 'członek',
