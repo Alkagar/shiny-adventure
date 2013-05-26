@@ -236,8 +236,7 @@ strong {
 
 .task-notes time {
   font-size: 80%;
-  text-decoration: underline;
-  display: block; }
+  text-decoration: underline; }
   .task-notes time:after {
     content: ":"; }
 .task-notes .task-note {

@@ -32,9 +32,11 @@
             $html = '';
             foreach($task->taskNotes as $taskNote) {
                 $content = AViewHelper::parseMarkdown($taskNote->content);
+                $taskAuthor = CHtml::tag('span', array('class' => 'task-note-author'), $taskNote->author->signature);
                 $taskContent = CHtml::tag('div', array('class' => 'task-note'), $content);
                 $taskDate = CHtml::tag('time', array('class' => 'task-note-date'), $taskNote->created_at);
-                $html = $taskDate . $taskContent . $html;
+                $taskNoteTitle = CHtml::tag('div', array(), Yii::t('site', 'text.task-note-by') . ' ' . $taskAuthor . ' ' . Yii::t('site', 'text.task-note-on') . ' ' . $taskDate);
+                $html =  $taskNoteTitle . $taskContent . $html;
             }
             return $html;
         }
