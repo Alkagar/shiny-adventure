@@ -29,6 +29,17 @@
         ),
 
         'components'=>array(
+            'Smtpmail' => array(
+                'class' => 'application.extensions.smtpmail.PHPMailer',
+                'Host'=>'smtp.gmail.com',
+                'Username'=>'alkagar@gmail.com',
+                'Password'=>'Tar-Telemnar#1',
+                'Mailer'=>'smtp',
+                'Port'=>587,
+                'SMTPSecure' => 'tls',
+                'SMTPAuth'=>true,
+            ),
+
             'user'=>array(
                 'allowAutoLogin'=>true,
                 'class' => 'AWebUser',

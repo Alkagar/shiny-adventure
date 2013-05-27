@@ -132,6 +132,9 @@
                 $jsonResponse['status'] = 'OK';
                 $jsonResponse['message'] = Yii::t('site', 'flash.operation-complete');
                 $jsonResponse['removeLink'] = $this->createUrl('task/removeAssigneeFromTask', array('id' => $id, 'userId' => $userId));
+                $mail = $assignee->user->mail;
+                $changeUrl = $this->createUrl('task/change', array('id' => $id, 'project_id' => $this->_projectId));
+                $this->_sendMail($mail, Yii::t('site', 'mail.assign-notification'), 'assign-notification', array('linkToTask' => $changeUrl));
             } else {
                 $jsonResponse['status'] = 'ERROR';
                 $jsonResponse['message'] = Yii::t('site', 'flash.operation-error');
@@ -188,6 +191,7 @@
                 'ajaxOnly + ' . join($ajaxOnly, ', '),
             );
         }
+
         public function accessRules() 
         {
             $params = array();

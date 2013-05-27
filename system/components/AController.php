@@ -16,6 +16,29 @@
             //Yii::app()->attachEventHandler('onException',array($this,'handleError'));
         }
 
+        protected function _sendMail($to, $subject, $view, $params = array())
+        {
+            $mail = Yii::app()->Smtpmail;
+            $mail->SetFrom('alkagar@gmail.com', 'Shiny Adventure');
+            $mail->Subject = $subject;
+
+            $content = $this->renderPartial('/mails/' . $view, $params, true);
+            $mail->MsgHTML($content);
+
+            if(!is_array($to)) {
+                $to = array($to);
+            } 
+            foreach($to as $emailAddress) {
+                $mail->AddAddress($emailAddress, "");
+            }
+
+            if(!$mail->Send()) {
+                return $mail->ErrorInfo;
+            } else {
+                return true;
+            }
+        }
+
         public function beforeRender($view) 
         {
             Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/scripts/jquery.min.js');
