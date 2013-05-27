@@ -29,6 +29,11 @@
             );
         }
 
+        public function getFileName() 
+        {
+            return substr(basename($this->url), 11);
+        }
+
         public function attributeLabels()
         {
             return array(

@@ -118,6 +118,18 @@
             $this->render('remove', array('project' => $project));
         }
 
+        public function actionShowAttachment($attachmentId) 
+        {
+            $attachment = Attachment::model()->findByPk($attachmentId);
+            if(is_null($attachment)) {
+                throw new Exception(Yii::t('site', 'error.no-such-attachment'));
+            } else {
+                header('Content-disposition: attachment; filename=' . $attachment->getFileName());
+                readfile($attachment->url);
+                Yii::app()->end();
+            }
+        }
+
         public function actionManageUsers($id)
         {
             $project = Project::model()->findByPk($id);
@@ -226,7 +238,7 @@
                 ),
                 array(
                     'allow',
-                    'actions' => array('show',),
+                    'actions' => array('show', 'showAttachment'),
                     'roles' => array('project_member' => $params),
                     'users' => array('@'),
                 ),
