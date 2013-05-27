@@ -102,8 +102,15 @@
         public function actionRemove($id)
         {
             $project = Project::model()->findByPk($id);
+            $attachmentFilesNames = array();
+            foreach($project->attachments as $attachment) {
+                $attachmentFilesNames[] = $attachment->url;
+            }
             $result = $project->delete();
             if($result) {
+                foreach($attachmentFilesNames as $url) {
+                    unlink($url);
+                }
                 Yii::app()->user->setFlash('notification', 'flash.operation-complete');
             } else {
                 Yii::app()->user->setFlash('notification', 'flash.operation-error');
