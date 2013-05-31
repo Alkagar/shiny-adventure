@@ -32,6 +32,7 @@
                 'author' => array(self::BELONGS_TO, 'User', 'author_id'),
                 'assignees' => array(self::HAS_MANY, 'Assignee', 'task_id'),
                 'taskNotes' => array(self::HAS_MANY, 'TaskNote', 'task_id'),
+                'attachments' => array(self::HAS_MANY, 'Attachment', 'belongs_to', 'condition' => 'attachments.type = "task"'),
             );
         }
 

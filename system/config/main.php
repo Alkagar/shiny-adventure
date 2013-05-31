@@ -90,6 +90,7 @@
             'dashboardPage' => '/user/dashboard',
 
             'projectAttachmentPath' => 'upload/projects/',
+            'taskAttachmentPath' => 'upload/tasks/',
         ),
 
     );
