@@ -10,6 +10,7 @@
         <li> <?php echo CHtml::link(Yii::t('site', 'menu.edit-profile'), array('user/editProfile')); ?> </li>
         <?php if($isGlobalAdmin) : ?>
         <li> <?php echo CHtml::link(Yii::t('site', 'menu.register'), array('/user/register')); ?> </li>
+        <li> <?php echo CHtml::link(Yii::t('site', 'menu.admin'), array('/admin/manage')); ?> </li>
         <?php endif; ?>
         <li> <?php echo CHtml::link(Yii::t('site', 'menu.logout'), array('main/logout')); ?> </li>
         <li> <?php echo CHtml::link(Yii::t('site', 'menu.help'), array('main/help')); ?> </li>

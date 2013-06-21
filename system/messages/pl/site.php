@@ -12,6 +12,7 @@
         'menu.dashboard'                   => 'dashboard',
         'menu.project-add'                 => 'dodaj projekt',
         'menu.project-list'                => 'twoje projekty',
+        'menu.admin'                            => 'zarządzaj sa',
         'menu.'                            => '',
 
         'footer.not-logged'                => 'nie jesteś zalogowany',
@@ -30,6 +31,8 @@
         'title.project-show'               => 'projekt',
         'title.project-list'               => 'twoje projeky',
         'title.task-change'                => 'edytuj zadanie',
+        'title.admin-manage'                           => 'zarządaj Shiny Adventure',
+        'title.admin-manage-task-statuses'                           => 'zarządzaj statusami zadań',
         'title.'                           => '',
 
 
@@ -56,10 +59,18 @@
         'text.task-note-on'                => 'dnia',
         'text.subtitle-dashboard-projects' => 'twoje projekty',
         'text.subtitle-dashboard-tasks'    => 'twoje zadania',
+        'text.admin-manage-status-list'                            => 'lista dostępnych statusów',
+        'text.admin-manage-status-form'                            => 'dodaj nowy status',
         'text.'                            => '',
 
         'rbac.project_owner'               => 'autor',
         'rbac.project_member'              => 'członek',
         'rbac.project_editor'              => 'edytor',
+
+        'config.status-internal-open' => 'otwarte',
+        'config.status-internal-closed' => 'zamknięte',
+        'config.status-internal-new' => 'nowe',
+        'config.status-internal' => '',
+
 
     );

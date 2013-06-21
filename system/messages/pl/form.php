@@ -15,6 +15,11 @@
         'label.task-time-spent' => 'poświęcony czas',
         'label.task-assignees' => 'osoby przypisane do zadania',
 
+        'label.status-type' => 'typ statusu',
+        'label.status-name' => 'nazwa',
+        'label.status-description' => 'opis',
+        'label.status-internal-type' => 'traktuj zadanie jako',
+
         'common.button.login' => 'zaloguj',
         'common.button.save' => 'zapisz',
 

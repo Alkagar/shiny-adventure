@@ -52,4 +52,12 @@
                 'criteria'=>$criteria,
             ));
         }
+
+        public static function getAllByType($type) 
+        {
+            $status = new Status();
+            $status->type = $type;
+            $dp = $status->search();
+            return $dp->getData();
+        }
     }
