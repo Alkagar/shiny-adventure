@@ -78,21 +78,8 @@
                     $task->status_id = $form->status_id;
                     $saveResult = $task->save();
 
-                    $files = CUploadedFile::getInstancesByName('attachment');
-                    foreach($files as $uploadedFile) {
-                        $name = $uploadedFile->getName();
-                        $name = time() . '_' . str_replace(' ', '_', $name);
-                        $path = Yii::app()->params['taskAttachmentPath'] . $name;
-                        $saveResult = $saveResult && $uploadedFile->saveAs($path);
-                        if($saveResult) {
-                            $attachment = new Attachment();
-                            $attachment->url = $path;
-                            $attachment->author_id = Yii::app()->user->id;
-                            $attachment->belongs_to = $task->id;
-                            $attachment->type = 'task';
-                            $saveResult = $saveResult && $attachment->save();
-                        }
-                    }
+                    $path = Yii::app()->params['taskAttachmentPath'];
+                    $this->_saveAttachments($task->id, 'task', $path, 'attachment');
 
                     if($saveResult) {
                         Yii::app()->user->setFlash('notification', 'flash.operation-complete');

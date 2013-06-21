@@ -39,6 +39,27 @@
             }
         }
 
+        protected function _saveAttachments($belongsTo, $type, $path, $fileVarName = 'attachment')
+        {
+            $saveResult = true;
+            $files = CUploadedFile::getInstancesByName($fileVarName);
+            foreach($files as $uploadedFile) {
+                $name = $uploadedFile->getName();
+                $name = time() . '_' . str_replace(' ', '_', $name);
+                $path = $path . $name;
+                $saveResult = $saveResult && $uploadedFile->saveAs($path);
+                if($saveResult) {
+                    $attachment = new Attachment();
+                    $attachment->url = $path;
+                    $attachment->author_id = Yii::app()->user->id;
+                    $attachment->belongs_to = $belongsTo;
+                    $attachment->type = $type;
+                    $saveResult = $saveResult && $attachment->save();
+                }
+            }
+            return $saveResult;
+        }
+
         public function beforeRender($view) 
         {
             Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/scripts/jquery.min.js');

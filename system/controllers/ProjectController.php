@@ -50,21 +50,8 @@
                     $project->description = $form->description;
                     $saveResult = $project->save();
 
-                    $files = CUploadedFile::getInstancesByName('attachment');
-                    foreach($files as $uploadedFile) {
-                        $name = $uploadedFile->getName();
-                        $name = time() . '_' . str_replace(' ', '_', $name);
-                        $path = Yii::app()->params['projectAttachmentPath'] . $name;
-                        $saveResult = $saveResult && $uploadedFile->saveAs($path);
-                        if($saveResult) {
-                            $attachment = new Attachment();
-                            $attachment->url = $path;
-                            $attachment->author_id = Yii::app()->user->id;
-                            $attachment->belongs_to = $project->id;
-                            $attachment->type = 'project';
-                            $saveResult = $saveResult && $attachment->save();
-                        }
-                    }
+                    $path = Yii::app()->params['projectAttachmentPath'];
+                    $this->_saveAttachments($project->id, 'project', $path, 'attachment');
 
                     if($saveResult) {
                         Yii::app()->user->setFlash('notification', 'flash.operation-complete');
