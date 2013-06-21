@@ -83,7 +83,10 @@
 
         public function actionList()
         {
-            $this->render('list');
+            $userProjects = Project::getUserProjects();
+            $this->render('list', array(
+                'projects' => $userProjects, 
+            ));
         }
 
         public function actionRemove($id)

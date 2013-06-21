@@ -11,6 +11,7 @@
         'menu.edit-profile'                => 'edytuj profil',
         'menu.dashboard'                   => 'dashboard',
         'menu.project-add'                 => 'dodaj projekt',
+        'menu.project-list'                => 'twoje projekty',
         'menu.'                            => '',
 
         'footer.not-logged'                => 'nie jesteś zalogowany',
@@ -27,6 +28,7 @@
         'title.project-add'                => 'dodaj projekt',
         'title.project-change'             => 'zmień projekt',
         'title.project-show'               => 'projekt',
+        'title.project-list'               => 'twoje projeky',
         'title.task-change'                => 'edytuj zadanie',
         'title.'                           => '',
 
